@@ -12,7 +12,7 @@ const StSidebarDiv = styled.div`
   left: 10px;
 
   //화면 가로폭이 좁아지면 사이드바 숨김
-  @media (max-width: 670px) {
+  @media (max-width: 850px) {
     display: none;
   }
 
@@ -25,30 +25,35 @@ const StSidebarDiv = styled.div`
 function Sidebar({ setChosenCVS }) {
   const onCUclick = () => {
     setChosenCVS({
+      field: 'CVS',
       compare: '==',
       value: 'CU'
     });
   };
   const onSevElevclick = () => {
     setChosenCVS({
+      field: 'CVS',
       compare: '==',
       value: '세븐일레븐'
     });
   };
   const onGSclick = () => {
     setChosenCVS({
+      field: 'CVS',
       compare: '==',
       value: 'GS'
     });
   };
   const onEmartclick = () => {
     setChosenCVS({
+      field: 'CVS',
       compare: '==',
       value: 'Emart'
     });
   };
   const onAllclick = () => {
     setChosenCVS({
+      field: 'CVS',
       compare: '!=',
       value: '임시'
     });

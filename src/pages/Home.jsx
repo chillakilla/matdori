@@ -3,7 +3,7 @@ import Feed from 'components/Feed';
 import Sidebar from 'components/Sidebar';
 
 function Home() {
-  const [chosenCVS, setChosenCVS] = useState({ compare: '!=', value: '임시' });
+  const [chosenCVS, setChosenCVS] = useState({ field: 'CVS', compare: '!=', value: '임시' });
   return (
     <>
       <span>홈입니다</span>

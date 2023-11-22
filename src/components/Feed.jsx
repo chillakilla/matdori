@@ -15,7 +15,7 @@ function Feed({ chosenCVS }) {
   console.log(chosenCVS);
   useEffect(() => {
     const fetchData = async () => {
-      const q = query(collection(db, 'feeds'), where('CVS', chosenCVS.compare, chosenCVS.value)); //where를 사용하여 조건을 걸 수 있다.
+      const q = query(collection(db, 'feeds'), where(chosenCVS.field, chosenCVS.compare, chosenCVS.value)); //where를 사용하여 조건을 걸 수 있다.
       const querySnapshot = await getDocs(q);
       console.log(querySnapshot);
       const initialFeeds = [];
@@ -31,7 +31,7 @@ function Feed({ chosenCVS }) {
 
   return (
     <StFeedSection>
-      {!feeds.length && <p>일치하는 항목이 없습니다.</p>}
+      {/* {!feeds.length && <p>일치하는 항목이 없습니다.</p>} */}
       {feeds &&
         feeds.map((feed) => {
           return <EachFeed key={feed.id} feed={feed} />;

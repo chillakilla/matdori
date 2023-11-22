@@ -1,11 +1,15 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+
 const StFeedDiv = styled.div`
   display: flex;
   flex-direction: column;
   border: 2px solid transparent;
   width: 60%;
+  min-width: 550px;
   align-items: center;
+  cursor: pointer;
   /* max-height: 400px;
   overflow: hidden; */
 
@@ -20,12 +24,16 @@ const StFeedDiv = styled.div`
   }
 `;
 
+const StTitle = styled.h1`
+  font-size: 1.5rem;
+`;
+
 const StFeedMainDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* max-height: 300px; */
-  /* overflow: hidden; */
+  /* max-height: 300px;
+  overflow: hidden; */
   /* ${(props) =>
     props.$heightBool &&
     `
@@ -35,15 +43,20 @@ const StFeedMainDiv = styled.div`
 `;
 
 function EachFeed({ feed }) {
+  const navigate = useNavigate();
   //   const feedDivRef = useRef('');
   //   let height = feedDivRef.current.clientHeight;
   //   console.log(height);
   //   let heightBool = height >= 400 ? true : false;
   //   console.log(heightBool);
+  const feedClickHndlr = () => {
+    navigate(`/detail/${feed.id}`);
+  };
+
   return (
-    <StFeedDiv>
+    <StFeedDiv onClick={feedClickHndlr}>
       <p>작성자 {feed.user}</p>
-      <p>{feed.title}</p>
+      <StTitle>{feed.title}</StTitle>
       <br />
       <StFeedMainDiv>
         <img src={feed.img_url} alt="" />
