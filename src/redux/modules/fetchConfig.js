@@ -9,21 +9,21 @@ const GET_EMART = 'fetch/GET_EMART';
 const GET_BY_USER = 'fetch/GET_BY_USER';
 
 //action creators
-export const getAll = (payload) => {
-  return { type: GET_ALL, payload };
+export const getAll = () => {
+  return { type: GET_ALL };
 };
-export const getGS = (payload) => {
-  return { type: GET_GS, payload };
+export const getGS = () => {
+  return { type: GET_GS };
 };
 
-export const getCU = (payload) => {
-  return { type: GET_CU, payload };
+export const getCU = () => {
+  return { type: GET_CU };
 };
-export const getSeven = (payload) => {
-  return { type: GET_SEVEN, payload };
+export const getSeven = () => {
+  return { type: GET_SEVEN };
 };
-export const getEmart = (payload) => {
-  return { type: GET_EMART, payload };
+export const getEmart = () => {
+  return { type: GET_EMART };
 };
 export const getByUser = (uid) => {
   return { type: GET_BY_USER, payload: uid };
