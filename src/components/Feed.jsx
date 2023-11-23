@@ -3,6 +3,9 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../firebase';
 import EachFeed from './EachFeed';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+
+//styled-components
 const StFeedSection = styled.section`
   display: flex;
   flex-direction: column;
@@ -10,12 +13,14 @@ const StFeedSection = styled.section`
   width: 100%;
 `;
 
-function Feed({ chosenCVS }) {
+function Feed() {
+  const fetchConfig = useSelector((state) => state.fetchConfig);
+
   const [feeds, setFeeds] = useState();
-  console.log(chosenCVS);
+
   useEffect(() => {
     const fetchData = async () => {
-      const q = query(collection(db, 'feeds'), where(chosenCVS.field, chosenCVS.compare, chosenCVS.value)); //where를 사용하여 조건을 걸 수 있다.
+      const q = query(collection(db, 'feeds'), where(fetchConfig.field, fetchConfig.compare, fetchConfig.value));
       const querySnapshot = await getDocs(q);
       console.log(querySnapshot);
       const initialFeeds = [];
@@ -26,7 +31,8 @@ function Feed({ chosenCVS }) {
       console.log(feeds);
     };
     fetchData();
-  }, [chosenCVS]);
+  }, [fetchConfig]);
+
   console.log(feeds);
 
   return (

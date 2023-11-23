@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { getAll, getCU, getGS, getSeven, getEmart } from 'redux/modules/fetchConfig';
 
 const StSidebarDiv = styled.div`
   width: 120px;
@@ -22,41 +24,22 @@ const StSidebarDiv = styled.div`
   }
 `;
 
-function Sidebar({ setChosenCVS }) {
+function Sidebar() {
+  const dispatch = useDispatch();
   const onCUclick = () => {
-    setChosenCVS({
-      field: 'CVS',
-      compare: '==',
-      value: 'CU'
-    });
+    dispatch(getCU());
   };
   const onSevElevclick = () => {
-    setChosenCVS({
-      field: 'CVS',
-      compare: '==',
-      value: '세븐일레븐'
-    });
+    dispatch(getSeven());
   };
   const onGSclick = () => {
-    setChosenCVS({
-      field: 'CVS',
-      compare: '==',
-      value: 'GS'
-    });
+    dispatch(getGS());
   };
   const onEmartclick = () => {
-    setChosenCVS({
-      field: 'CVS',
-      compare: '==',
-      value: 'Emart'
-    });
+    dispatch(getEmart());
   };
   const onAllclick = () => {
-    setChosenCVS({
-      field: 'CVS',
-      compare: '!=',
-      value: '임시'
-    });
+    dispatch(getAll());
   };
 
   return (
