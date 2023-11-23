@@ -46,7 +46,7 @@ const StTitle = styled.h1`
 const StGradientDiv = styled.div`
   display: inline-block;
   width: 100%;
-  height: 20px;
+  height: 50px;
   position: absolute;
   bottom: 0px;
   left: 0px;

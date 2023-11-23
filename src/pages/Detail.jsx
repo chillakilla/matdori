@@ -34,7 +34,6 @@ function Detail() {
       <p>{feed.content}</p>
       <br />
       <p>작성일 : {feed.date}</p>
-      <p>문서id : {feed.id}</p>
       <p>편의점 : {feed.CVS}</p>
     </>
   );
