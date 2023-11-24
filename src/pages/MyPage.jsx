@@ -3,7 +3,6 @@ import ImgUpload from 'components/UI/ImgUpload';
 import Header from 'components/UI/Header';
 import React, { useState } from 'react';
 import { auth } from '../firebase';
-import Feed from 'components/Feed';
 
 function MyPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(auth.currentUser !== null);
@@ -33,10 +32,9 @@ function MyPage() {
           <FeedTitleArea>
             <FeedTitle>작성한 포스트</FeedTitle>
           </FeedTitleArea>
-          {/* <Feed>
+          <Feed>
             <NoResult>작성한 포스트가 없습니다.</NoResult>
-          </Feed> */}
-          <Feed />
+          </Feed>
         </FeedArea>
       </Container>
     </>
@@ -107,7 +105,7 @@ const FeedTitle = styled.div`
   font-weight: 500;
   border-bottom: 1px solid #333333;
 `;
-// const Feed = styled.div``;
+const Feed = styled.div``;
 
 const NoResult = styled.p`
   margin-top: 80px;
