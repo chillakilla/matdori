@@ -2,10 +2,10 @@ import { auth, db, storage } from '../../firebase';
 import { addDoc, collection } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { add_feed } from './redux/modules/addNewFeed';
-import { open_modal } from './redux/modules/modal';
+import { add_feed } from 'redux/modules/addNewFeed';
+import { open_modal } from 'redux/modules/modal';
 
 function Inputform() {
   const [title, setTitle] = useState('');
@@ -13,8 +13,6 @@ function Inputform() {
   const [selectedFile, setSelectedFile] = useState('');
   const [store, setStore] = useState('CU'); //편의점 이름
 
-  //store에 있는 addNewFeed 데이터 가져오기
-  const currentEmail = useSelector((state) => state.currentEmail);
   //dispatch
   const dispatch = useDispatch();
 
@@ -80,9 +78,6 @@ function Inputform() {
         <StSection>
           <div>
             <p>날짜</p>
-          </div>
-          <div>
-            <p>작성자 : {currentEmail}</p>
           </div>
 
           <StDiv>

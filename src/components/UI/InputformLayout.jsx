@@ -4,16 +4,15 @@ import styled from 'styled-components';
 import { collection, getDocs, query } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useEffect } from 'react';
-import Auth from './Auth';
 import { useDispatch, useSelector } from 'react-redux';
-import { stored_feed } from './redux/modules/addNewFeed';
-import { open_modal } from './redux/modules/modal';
+import { stored_feed } from 'redux/modules/addNewFeed';
+import { open_modal } from 'redux/modules/modal';
 
 function InputformLayout() {
   //redux
   const feeds = useSelector((state) => state.addNewFeed);
   const modal = useSelector((state) => state.modal);
-  const currentEmail = useSelector((state) => state.currentEmail);
+  //const currentEmail = useSelector((state) => state.currentEmail);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -42,41 +41,29 @@ function InputformLayout() {
 
   const showModal = () => {
     //로그인 여부 체크 (자료형 false 반환 : "",null,undefined,0 NaN)
-    if (!currentEmail) {
-      alert('로그인하셔야 새글 작성이 가능합니다.');
-      return;
-    }
+    // if (!currentEmail) {
+    //   alert('로그인하셔야 새글 작성이 가능합니다.');
+    //   return;
+    // }
     dispatch(open_modal(true));
   };
 
   return (
     <>
-      <Auth />
       <Button onClick={showModal}>
         <div> 새 글 작성시 여기를 클릭하세요!</div>
       </Button>
       {modal && <Modal />}
-
-      {feeds.map((feed) => {
-        return (
-          <ResultDiv>
-            <div>제목: {feed.title}</div>
-            <div>내용: {feed.content}</div>
-            <div>이미지: {feed.image_url}</div>
-            <div>편의점: {feed.store}</div>
-          </ResultDiv>
-        );
-      })}
     </>
   );
 }
 
 const Button = styled.button`
+  margin-top: 100px;
   width: 400px;
   background-color: transparent;
   cursor: pointer;
   border: 1px solid black;
-  margin: 20px;
 
   &:hover {
     border: 1px solid #7579e7;
