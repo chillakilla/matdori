@@ -63,8 +63,6 @@ function Inputform() {
                 image_url: uploadImageUrl
               };
 
-              dispatch(add_feed(newData));
-
               //3. 파이어스토어에 데이터 저장
               const collectionRef = collection(db, 'feeds');
               await addDoc(collectionRef, newData);
