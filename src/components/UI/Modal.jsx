@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Inputform from './Inputform';
-import { open_modal } from './redux/modules/modal';
+import { open_modal } from 'redux/modules/modal';
 import { useDispatch } from 'react-redux';
 
 function Modal() {
