@@ -11,7 +11,7 @@ function Inputform() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [selectedFile, setSelectedFile] = useState('');
-  const [store, setStore] = useState('CU'); //편의점 이름
+  const [CVS, setCVS] = useState('CU'); //편의점 이름
 
   //dispatch
   const dispatch = useDispatch();
@@ -26,10 +26,7 @@ function Inputform() {
     if (selectedFile === '') {
       return false;
     }
-    console.log('auth', `${auth.currentUser.uid}`);
-    console.log('select', `${selectedFile.name}`);
     const imageRef = ref(storage, `${auth.currentUser.uid}/${selectedFile.name}`);
-    console.log('imageRef', imageRef);
     try {
       await uploadBytes(imageRef, selectedFile);
       // 저장된 image url :getDownloadURL(imageRef)
@@ -55,7 +52,7 @@ function Inputform() {
               const newData = {
                 email: 'test',
                 content,
-                store,
+                CVS,
                 date: new Date(),
                 title,
                 image_url: uploadImageUrl
@@ -93,7 +90,7 @@ function Inputform() {
           </StDiv>
           <StDiv>
             <p>편의점</p>
-            <select value={store} onChange={(event) => setStore(event.target.value)}>
+            <select value={CVS} onChange={(event) => setCVS(event.target.value)}>
               <option>CU</option>
               <option>GS</option>
               <option>이마트24</option>
