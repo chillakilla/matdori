@@ -89,7 +89,9 @@ function EachFeed({ feed }) {
           src="https://global.discourse-cdn.com/turtlehead/optimized/2X/c/c830d1dee245de3c851f0f88b6c57c83c69f3ace_2_250x250.png"
           alt=""
         />
+        {/*
         <span>작성자 {feed.user}</span>
+*/}
       </StWriterDiv>
       <StTitle>{feed.title}</StTitle>
       <br />
