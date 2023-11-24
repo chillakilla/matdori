@@ -9,7 +9,6 @@ import { Provider } from 'react-redux';
 // import { app } from './firebase';
 // console.log(app);
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
