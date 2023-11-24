@@ -22,7 +22,14 @@ function MyPage() {
           <Email>@jnonono</Email>
         </InfoWrapper>
       </Profile>
-      <Feed> </Feed>
+      <FeedArea>
+        <FeedTitleArea>
+          <FeedTitle>작성한 포스트</FeedTitle>
+        </FeedTitleArea>
+        <Feed>
+          <NoResult>작성한 포스트가 없습니다.</NoResult>
+        </Feed>
+      </FeedArea>
     </Container>
   );
 }
@@ -30,26 +37,25 @@ function MyPage() {
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 1200px;
+  width: 1080px;
   margin: 0 auto;
   padding: 40px 0;
 `;
 const Profile = styled.div`
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
   min-width: 360px;
   height: 120px;
   padding: 32px 24px;
   background-color: white;
-  box-shadow: 0 0 4px #aaa;
-  border-radius: 20px;
+  border-radius: 16px;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.06);
 `;
 const ProfileImg = styled.div`
   position: relative;
   width: 80px;
   height: 80px;
-  /* overflow: hidden; */
 `;
 const EditImg = styled.div`
   position: absolute;
@@ -72,11 +78,32 @@ const Email = styled.span`
   font-size: 14px;
   color: #aaa;
 `;
-const Feed = styled.div`
-  min-width: 720px;
-  height: 400px;
+const FeedArea = styled.div`
+  min-width: 680px;
+  min-height: 260px;
+  padding: 30px 20px;
   background-color: white;
-  box-shadow: 0 0 4px #aaa;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.06);
   border-radius: 20px;
 `;
+const FeedTitleArea = styled.div`
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #ededed;
+`;
+const FeedTitle = styled.div`
+  width: 146px;
+  padding: 0 0 15px;
+  text-align: center;
+  font-weight: 500;
+  border-bottom: 1px solid #333333;
+`;
+const Feed = styled.div``;
+
+const NoResult = styled.p`
+  margin-top: 80px;
+  color: #777777;
+  text-align: center;
+`;
+
 export default MyPage;
