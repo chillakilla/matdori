@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, onSnapshot, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../firebase';
 import EachFeed from './EachFeed';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { setFeed } from 'redux/modules/feeds';
+import { setFeeds } from 'redux/modules/feeds';
 
 //styled-components
 const StFeedSection = styled.section`
@@ -20,17 +20,33 @@ function Feed() {
   const feeds = useSelector((state) => state.feeds);
   const dispatch = useDispatch();
 
+  //서버에서 자료 가져오는 첫번째 버전(아래 버전이 잘 안되면 이걸로라도...)
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const q = query(collection(db, 'feeds'));
+  //     const querySnapshot = await getDocs(q);
+  //     const initialFeeds = [];
+  //     querySnapshot.forEach((doc) => {
+  //       initialFeeds.push({ id: doc.id, ...doc.data() });
+  //     });
+  //     dispatch(setFeeds(initialFeeds));
+  //   };
+  //   fetchData();
+  // }, []);
+
+  //서버에서 자료 가져오는 개선된 버전 -> 자료 수정/삭제/추가 에따라 실시간 업데이트
+  //cf ) onSnapshot 은 비동기 작업이 아님--> async/await 미사용
   useEffect(() => {
-    const fetchData = async () => {
-      const q = query(collection(db, 'feeds'));
-      const querySnapshot = await getDocs(q);
-      const initialFeeds = [];
+    const unsubscribe = onSnapshot(collection(db, 'feeds'), (querySnapshot) => {
+      const updatedFeeds = [];
       querySnapshot.forEach((doc) => {
-        initialFeeds.push({ id: doc.id, ...doc.data() });
+        updatedFeeds.push({ id: doc.id, ...doc.data() });
       });
-      dispatch(setFeed(initialFeeds));
-    };
-    fetchData();
+      dispatch(setFeeds(updatedFeeds));
+    });
+
+    return () => unsubscribe(); // cleanup 함수로 리스너 해제(컴포 언마운트 될때!!)
   }, []);
 
   //조건에 맞춰 필터링하는 로직

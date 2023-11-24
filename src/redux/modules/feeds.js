@@ -1,17 +1,17 @@
 const initialState = [];
 
 //action types
-const SET_FEED = 'feeds/SET_FEED';
+const SET_FEEDS = 'feeds/SET_FEEDS';
 
 //action creators
-export const setFeed = (payload) => {
-  return { type: SET_FEED, payload };
+export const setFeeds = (payload) => {
+  return { type: SET_FEEDS, payload };
 };
 
 // 리듀서
 const feeds = (state = initialState, action) => {
   switch (action.type) {
-    case SET_FEED:
+    case SET_FEEDS:
       return [...action.payload];
 
     default:
