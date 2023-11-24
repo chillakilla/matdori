@@ -63,12 +63,6 @@ const StFeedMainDiv = styled.div`
   max-height: 400px;
   overflow: hidden;
   background-color: white;
-  /* ${(props) =>
-    props.$heightBool &&
-    `
-    max-height:300px;
-    overflow:hidden;
-    `} */
 `;
 const StDetailBtn = styled.button`
   margin-top: 20px;
@@ -83,11 +77,7 @@ const StDetailBtn = styled.button`
 
 function EachFeed({ feed }) {
   const navigate = useNavigate();
-  //   const feedDivRef = useRef('');
-  //   let height = feedDivRef.current.clientHeight;
-  //   console.log(height);
-  //   let heightBool = height >= 400 ? true : false;
-  //   console.log(heightBool);
+
   const feedClickHndlr = () => {
     navigate(`/detail/${feed.id}`);
   };

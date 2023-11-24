@@ -1,9 +1,11 @@
 import { createStore } from 'redux';
 import { combineReducers } from 'redux';
-import fetchConfig from 'redux/modules/fetchConfig';
+import filterConfig from 'redux/modules/filterConfig';
+import feeds from 'redux/modules/feeds';
 
 const rootReducer = combineReducers({
-  fetchConfig
+  filterConfig,
+  feeds
 });
 
 const store = createStore(rootReducer);

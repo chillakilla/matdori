@@ -1,4 +1,4 @@
-const initialState = { field: 'CVS', compare: '!=', value: '임시' };
+const initialState = { field: 'CVS', compare: '!=', value: '전체' };
 
 //action types
 const GET_ALL = 'fetch/GET_ALL';
@@ -30,10 +30,10 @@ export const getByUser = (uid) => {
 };
 
 // 리듀서
-const fetchConfig = (state = initialState, action) => {
+const filterConfig = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL:
-      return { field: 'CVS', compare: '!=', value: '임시' };
+      return { field: 'CVS', compare: '!=', value: '전체' };
 
     case GET_GS:
       return {
@@ -73,4 +73,4 @@ const fetchConfig = (state = initialState, action) => {
   }
 };
 
-export default fetchConfig;
+export default filterConfig;

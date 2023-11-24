@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { getAll, getCU, getGS, getSeven, getEmart } from 'redux/modules/fetchConfig';
+import { getAll, getCU, getGS, getSeven, getEmart } from 'redux/modules/filterConfig';
 
 const StSidebarDiv = styled.div`
   width: 120px;
