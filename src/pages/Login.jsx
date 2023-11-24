@@ -3,14 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import NavBar from 'components/UI/NavBar';
 
-function Login() {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [showError, setShowError] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(auth.currentUser !== null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -89,10 +90,17 @@ function Login() {
       setShowError(true);
     }
   };
-  const logOut = (event) => {
+  const logOut = async (event) => {
     event.preventDefault();
-    setIsLoggedIn(false);
-    alert('로그아웃 되었습니다.');
+
+    try {
+      await signOut(auth);
+      setIsLoggedIn(false);
+      alert('로그아웃 되었습니다.');
+      navigate('/');
+    } catch (error) {
+      console.log('로그아웃 중 오류가 발생했습니다.', error.message);
+    }
   };
 
   const signWithGoogle = async (event) => {
@@ -113,43 +121,46 @@ function Login() {
   };
 
   return (
-    <LoginContainer>
-      <InputContainer>
-        <Form>
-          <Title>로그인</Title>
-          <IdContainer>
-            <label>Email : &nbsp;</label>
-            <Input
-              type="email"
-              value={email}
-              name="email"
-              onChange={onChange}
-              required
-              placeholder="asdasd@gmail.com"
-              autoFocus
-            ></Input>
-          </IdContainer>
-          <PasswordContainer>
-            <label>Password : &nbsp;</label>
-            <Input type="password" value={password} name="password" onChange={onChange} required></Input>
-          </PasswordContainer>
-          <ErrorTextContainer>{showError && <ErrorText>{error}</ErrorText>}</ErrorTextContainer>
-        </Form>
-        <ButtonContainer>
-          {isLoggedIn ? (
-            <LoginButton onClick={logOut}>로그아웃</LoginButton>
-          ) : (
-            <>
-              <LoginButton onClick={signUp}>회원가입</LoginButton>
-              <LoginButton onClick={signIn}>로그인</LoginButton>
-              <LoginButton onClick={signWithGoogle}>Google 로그인</LoginButton>
-            </>
-          )}
-        </ButtonContainer>
-      </InputContainer>
-    </LoginContainer>
+    <>
+      <NavBar isLoggedIn={isLoggedIn} />
+      <LoginContainer>
+        <InputContainer>
+          <Form>
+            <Title>로그인</Title>
+            <IdContainer>
+              <label>Email : &nbsp;</label>
+              <Input
+                type="email"
+                value={email}
+                name="email"
+                onChange={onChange}
+                required
+                placeholder="asdasd@gmail.com"
+                autoFocus
+              ></Input>
+            </IdContainer>
+            <PasswordContainer>
+              <label>Password : &nbsp;</label>
+              <Input type="password" value={password} name="password" onChange={onChange} required></Input>
+            </PasswordContainer>
+            <ErrorTextContainer>{showError && <ErrorText>{error}</ErrorText>}</ErrorTextContainer>
+          </Form>
+          <ButtonContainer>
+            {isLoggedIn ? (
+              <LoginButton onClick={logOut}>로그아웃</LoginButton>
+            ) : (
+              <>
+                <LoginButton onClick={signUp}>회원가입</LoginButton>
+                <LoginButton onClick={signIn}>로그인</LoginButton>
+                <LoginButton onClick={signWithGoogle}>Google 로그인</LoginButton>
+              </>
+            )}
+          </ButtonContainer>
+        </InputContainer>
+      </LoginContainer>
+    </>
   );
-}
+};
 
 const LoginContainer = styled.div`
   display: flex;
