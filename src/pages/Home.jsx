@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import NavBar from '../components/UI/NavBar';
+import Header from '../components/UI/Header';
 import { auth } from '../firebase';
 
 function Home() {
   const [isLoggedIn] = useState(auth.currentUser !== null);
-  return <NavBar isLoggedIn={isLoggedIn} />;
+  return <Header isLoggedIn={isLoggedIn} />;
 }
 
 export default Home;

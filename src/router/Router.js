@@ -3,7 +3,7 @@ import Home from 'pages/Home';
 import Detail from 'pages/Detail';
 import Login from 'pages/Login';
 import MyPage from 'pages/MyPage';
-import NavBar from '../components/UI/NavBar';
+import Header from '../components/UI/Header';
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../firebase';
@@ -19,7 +19,7 @@ const Router = () => {
   }, []);
   return (
     <BrowserRouter>
-      <NavBar isLoggedIn={isLoggedIn} />
+      <Header isLoggedIn={isLoggedIn} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/detail" element={<Detail />} />

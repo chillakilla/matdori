@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
-import NavBar from 'components/UI/NavBar';
+import Header from 'components/UI/Header';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -122,7 +122,7 @@ const Login = () => {
 
   return (
     <>
-      <NavBar isLoggedIn={isLoggedIn} />
+      <Header isLoggedIn={isLoggedIn} />
       <LoginContainer>
         <InputContainer>
           <Form>
