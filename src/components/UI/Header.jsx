@@ -5,7 +5,7 @@ import { auth } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 
-const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
+const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -24,7 +24,7 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
   };
 
   return (
-    <NavBarContainer>
+    <HeaderContainer>
       <Logo>🏬편의점맛도리</Logo>
       <ButtonContainer>
         {isLoggedIn ? (
@@ -45,11 +45,11 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
           </>
         )}
       </ButtonContainer>
-    </NavBarContainer>
+    </HeaderContainer>
   );
 };
 
-const NavBarContainer = styled.div`
+const HeaderContainer = styled.div`
   display: flex;
   font-weight: bold;
   justify-content: space-between;
@@ -98,4 +98,4 @@ const Button1 = styled.button`
   cursor: pointer;
 `;
 
-export default NavBar;
+export default Header;

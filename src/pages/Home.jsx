@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Feed from 'components/Feed';
 import Sidebar from 'components/Sidebar';
-import NavBar from '../components/UI/NavBar';
+import Header from '../components/UI/Header';
 import { auth } from '../firebase';
 
 function Home() {
@@ -9,7 +9,7 @@ function Home() {
 
   return (
     <>
-      <NavBar isLoggedIn={isLoggedIn} />
+      <Header isLoggedIn={isLoggedIn} />
       <span>홈입니다</span>
       <Sidebar />
       <Feed />
