@@ -37,6 +37,11 @@ function Inputform() {
     }
   };
 
+  let formattedDate = new Intl.DateTimeFormat('ko-KR', {
+    dateStyle: 'full',
+    timeStyle: 'short'
+  }).format(new Date());
+
   return (
     <>
       <form
@@ -53,7 +58,7 @@ function Inputform() {
                 email: 'test',
                 content,
                 CVS,
-                date: new Date(),
+                date: formattedDate,
                 title,
                 image_url: uploadImageUrl
               };

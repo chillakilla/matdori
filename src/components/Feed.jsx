@@ -61,6 +61,8 @@ function Feed() {
       {!filterdFeeds.length && <p>일치하는 항목이 없습니다.</p>}
       {filterdFeeds &&
         filterdFeeds.map((feed) => {
+          console.log('feed', feed);
+
           return <EachFeed key={feed.id} feed={feed} />;
         })}
     </StFeedSection>
