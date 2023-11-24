@@ -10,7 +10,7 @@ const StSidebarDiv = styled.div`
 
   //나중에 헤더 생기면 위치 수정 필요!!
   position: fixed;
-  top: 50px;
+  top: 100px;
   left: 10px;
 
   //화면 가로폭이 좁아지면 사이드바 숨김

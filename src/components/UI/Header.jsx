@@ -25,7 +25,13 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
 
   return (
     <HeaderContainer>
-      <Logo>🏬편의점맛도리</Logo>
+      <Logo
+        onClick={() => {
+          navigate('/');
+        }}
+      >
+        🏬편의점맛도리
+      </Logo>
       <ButtonContainer>
         {isLoggedIn ? (
           <>
@@ -69,6 +75,7 @@ const Logo = styled.h1`
   padding: 10px;
   color: #7579e7;
   margin-left: 20px;
+  cursor: pointer;
 `;
 
 const ButtonContainer = styled.div`
