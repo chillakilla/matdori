@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,9 +12,10 @@ const StFeedDiv = styled.div`
   cursor: pointer;
 
   margin: 10px;
-  padding: 20px;
+  padding: 5px 20px 20px 20px;
   border-radius: 15px 15px 15px 15px;
-  background-color: #9ab3f5;
+  background-color: white;
+  border: 1px solid #7579e7;
   color: black;
 
   img {
@@ -28,8 +29,7 @@ const StWriterDiv = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  background-color: #7579e7;
-  border-radius: 10px;
+  border-bottom: 1px solid gray;
   padding: 10px;
   img {
     width: 50px;
@@ -51,7 +51,7 @@ const StGradientDiv = styled.div`
   bottom: 0px;
   left: 0px;
   right: 0px;
-  background-image: linear-gradient(rgba(154, 179, 245, 0) 0%, rgba(154, 179, 245, 0.5) 50%, rgb(154, 179, 245) 100%);
+  background-image: linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 50%, rgb(255, 255, 255) 100%);
 `;
 
 const StFeedMainDiv = styled.div`
@@ -60,7 +60,7 @@ const StFeedMainDiv = styled.div`
   flex-direction: column;
   width: 100%;
   align-items: center;
-  max-height: 300px;
+  max-height: 400px;
   overflow: hidden;
   background-color: white;
   /* ${(props) =>
@@ -69,6 +69,16 @@ const StFeedMainDiv = styled.div`
     max-height:300px;
     overflow:hidden;
     `} */
+`;
+const StDetailBtn = styled.button`
+  margin-top: 20px;
+  width: 100%;
+  background-color: inherit;
+  border: 1px solid #7579e7;
+  border-radius: 5px;
+  color: #7579e7;
+  padding: 0.5rem;
+  cursor: pointer;
 `;
 
 function EachFeed({ feed }) {
@@ -103,9 +113,10 @@ function EachFeed({ feed }) {
         </div>
         <StGradientDiv></StGradientDiv>
       </StFeedMainDiv>
-      <p>작성일 : {feed.date}</p>
+      {/* <p>작성일 : {feed.date}</p>
       <p>문서id : {feed.id}</p>
-      <p>편의점 : {feed.CVS}</p>
+      <p>편의점 : {feed.CVS}</p> */}
+      <StDetailBtn>자세히 보기</StDetailBtn>
     </StFeedDiv>
   );
 }
