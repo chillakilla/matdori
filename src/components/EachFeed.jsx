@@ -95,7 +95,7 @@ function EachFeed({ feed }) {
       <br />
       <StFeedMainDiv>
         <div>
-          <img src={feed.img_url} alt="" />
+          <img src={feed.image_url} alt="" />
           <br />
 
           <p>{feed.content}</p>
