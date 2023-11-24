@@ -1,9 +1,15 @@
-import React from 'react';
 import styled from 'styled-components';
 import ImgUpload from 'components/UI/ImgUpload';
+import NavBar from 'components/UI/Header';
+import React, { useState } from 'react';
+import { auth } from '../firebase';
 
-function MyPage() {
+function MyPage() {  
+  const [isLoggedIn, setIsLoggedIn] = useState(auth.currentUser !== null);
+  
   return (
+    <>
+     <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
     <Container>
       <Profile>
         <ProfileImg>
@@ -31,8 +37,8 @@ function MyPage() {
         </Feed>
       </FeedArea>
     </Container>
+</>
   );
-}
 
 const Container = styled.div`
   display: flex;

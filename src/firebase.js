@@ -1,23 +1,28 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-// import { getFirestore } from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-
 // Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FB_API_KEY,
-  authDomain: process.env.REACT_APP_FB_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_APP_ID
+  apiKey: 'AIzaSyAVfmiyGHGL9S5RsMETiJUtM_RNh3fK-9Y',
+  authDomain: 'prac1-5411a.firebaseapp.com',
+  projectId: 'prac1-5411a',
+  storageBucket: 'prac1-5411a.appspot.com',
+  messagingSenderId: '907197694037',
+  appId: '1:907197694037:web:983787cde2dc80347394dc',
+  measurementId: 'G-QTB7FMJKYP'
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
 export const auth = getAuth(app);
-// export const db = getFirestore(app);
+export const db = getFirestore(app);
 export const storage = getStorage(app);
+
