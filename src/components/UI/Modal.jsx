@@ -1,17 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 import Inputform from './Inputform';
+import { open_modal } from './redux/modules/modal';
+import { useDispatch } from 'react-redux';
 
-function Modal({ setModalOpen, setData, currentEmail }) {
+function Modal() {
+  //redux
+  const dispatch = useDispatch();
+
   const closeModal = () => {
-    setModalOpen(false);
+    dispatch(open_modal(false));
   };
 
   return (
     <BackGround>
       <Container>
         <Button onClick={closeModal}>닫기</Button>
-        <Inputform setData={setData} currentEmail={currentEmail} setModalOpen={setModalOpen} />
+        <Inputform />
       </Container>
     </BackGround>
   );

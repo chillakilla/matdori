@@ -1,27 +1,43 @@
 import { auth, db, storage } from '../../firebase';
 import { addDoc, collection } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { add_feed } from './redux/modules/addNewFeed';
+import { open_modal } from './redux/modules/modal';
 
-function Inputform({ setData, currentEmail, setModalOpen }) {
+function Inputform() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [selectedFile, setSelectedFile] = useState('');
   const [store, setStore] = useState('CU'); //편의점 이름
+
+  //store에 있는 addNewFeed 데이터 가져오기
+  const currentEmail = useSelector((state) => state.currentEmail);
+  //dispatch
+  const dispatch = useDispatch();
 
   const handleFileSelect = (event) => {
     setSelectedFile(event.target.files[0]);
   };
 
   //이미지 파일 업로드
-  //try~catch 추가하기******
   const handleUpload = async () => {
+    //[파일선택] 버튼 안눌러서 선택한 파일 없는경우
+    if (selectedFile === '') {
+      return false;
+    }
     const imageRef = ref(storage, `${auth.currentUser.uid}/${selectedFile.name}`);
-    await uploadBytes(imageRef, selectedFile);
 
-    // 저장된 image url :getDownloadURL(imageRef)
-    return await getDownloadURL(imageRef);
+    try {
+      await uploadBytes(imageRef, selectedFile);
+      // 저장된 image url :getDownloadURL(imageRef)
+      return await getDownloadURL(imageRef);
+    } catch (error) {
+      console.log('Inputform.jsx (handleUpload): ', error);
+      throw error;
+    }
   };
 
   return (
@@ -30,27 +46,34 @@ function Inputform({ setData, currentEmail, setModalOpen }) {
         onSubmit={async (event) => {
           event.preventDefault();
 
-          if (window.confirm('새글을 등록하시겠습니까?')) {
-            //1. 이미지 파일 업로드 (파이어스토어보다 밑으로가면 비동기식이라 저장안되는 경우 발생)
-            const uploadImageUrl = await handleUpload();
+          try {
+            if (window.confirm('새글을 등록하시겠습니까?')) {
+              //1. 이미지 파일 업로드
+              const uploadImageUrl = await handleUpload();
 
-            const newData = {
-              email: 'test',
-              content,
-              store,
-              date: new Date(),
-              title,
-              image_url: uploadImageUrl
-            };
-            setData((prev) => [newData, ...prev]);
+              //2. 모달창에 입력된 새로운 데이터
+              const newData = {
+                email: 'test',
+                content,
+                store,
+                date: new Date(),
+                title,
+                image_url: uploadImageUrl
+              };
 
-            //2. 파이어스토어에 데이터 저장
-            const collectionRef = collection(db, 'newData');
-            await addDoc(collectionRef, newData);
+              dispatch(add_feed(newData));
 
-            setModalOpen(false);
-          } else {
-            return;
+              //3. 파이어스토어에 데이터 저장
+              const collectionRef = collection(db, 'newData');
+              await addDoc(collectionRef, newData);
+
+              //4. 모달닫기
+              dispatch(open_modal(false));
+            } else {
+              return;
+            }
+          } catch (Error) {
+            console.log('[form Error] (Inputform.jsx): ', Error);
           }
         }}
       >

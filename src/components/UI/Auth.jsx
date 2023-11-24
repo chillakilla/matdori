@@ -2,19 +2,25 @@
 import React, { useEffect, useState } from 'react';
 import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { current_Email } from './redux/modules/currentEmail';
+import { useDispatch, useSelector } from 'react-redux';
 
-const Auth = ({ currentEmail, setCurrentEmail }) => {
+const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  //redux
+  const currentEmail = useSelector((state) => state.currentEmail);
+  const dispatch = useDispatch();
 
   //현재 로그인한 사용자 가져오기
   useEffect(() => {
     //(onAuthStateChanged)
     // 인증 객체의 상태변화 감지 리스너 (로그인/로그아웃)
     auth.onAuthStateChanged((user) => {
-      setCurrentEmail(user ? auth.currentUser.email : '');
+      dispatch(current_Email(user ? auth.currentUser.email : ''));
     });
-  }, [currentEmail]);
+  }, [dispatch, currentEmail]);
 
   const onChange = (event) => {
     const {
