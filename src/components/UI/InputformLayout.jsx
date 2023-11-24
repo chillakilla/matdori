@@ -5,7 +5,6 @@ import { collection, getDocs, query } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { stored_feed } from 'redux/modules/addNewFeed';
 import { open_modal } from 'redux/modules/modal';
 
 function InputformLayout() {
@@ -30,7 +29,7 @@ function InputformLayout() {
         querySnapshot.forEach((doc) => {
           initialTodos.push({ ...doc.data() });
         });
-        dispatch(stored_feed(initialTodos));
+        //dispatch(stored_feed(initialTodos));
       } catch (Error) {
         console.log('InputformLayout.jsx (useEffect): ', Error);
       }
