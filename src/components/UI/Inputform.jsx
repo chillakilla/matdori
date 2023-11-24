@@ -4,7 +4,7 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { add_feed } from 'redux/modules/addNewFeed';
+import { add_feed } from 'redux/modules/feeds';
 import { open_modal } from 'redux/modules/modal';
 
 function Inputform() {
@@ -26,8 +26,10 @@ function Inputform() {
     if (selectedFile === '') {
       return false;
     }
+    console.log('auth', `${auth.currentUser.uid}`);
+    console.log('select', `${selectedFile.name}`);
     const imageRef = ref(storage, `${auth.currentUser.uid}/${selectedFile.name}`);
-
+    console.log('imageRef', imageRef);
     try {
       await uploadBytes(imageRef, selectedFile);
       // 저장된 image url :getDownloadURL(imageRef)
@@ -62,7 +64,7 @@ function Inputform() {
               dispatch(add_feed(newData));
 
               //3. 파이어스토어에 데이터 저장
-              const collectionRef = collection(db, 'newData');
+              const collectionRef = collection(db, 'feeds');
               await addDoc(collectionRef, newData);
 
               //4. 모달닫기

@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 
 function Detail() {
   const feeds = useSelector((state) => state.feeds);
+  console.log(feeds);
   const params = useParams();
   const filteredFeed = feeds.filter((feed) => feed.id === params.id);
   const feed = filteredFeed[0];
@@ -15,7 +16,7 @@ function Detail() {
       <div>Detail</div>
       <p>작성자 {feed.user}</p>
       <h1>{feed.title}</h1>
-      <img src={feed.img_url} alt="" />
+      <img src={feed.image_url} alt="" />
       <br />
       <p>{feed.content}</p>
       <br />
