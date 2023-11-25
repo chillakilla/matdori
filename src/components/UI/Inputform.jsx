@@ -24,7 +24,7 @@ function Inputform() {
   const handleUpload = async () => {
     //[파일선택] 버튼 안눌러서 선택한 파일 없는경우
     if (selectedFile === '') {
-      return false;
+      return '';
     }
     const imageRef = ref(storage, `${auth.currentUser.uid}/${selectedFile.name}`);
     try {
@@ -60,7 +60,8 @@ function Inputform() {
                 CVS,
                 date: formattedDate,
                 title,
-                image_url: uploadImageUrl
+                image_url: uploadImageUrl,
+                user: '로그인한 사람 정보 출력'
               };
 
               //3. 파이어스토어에 데이터 저장
