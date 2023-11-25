@@ -3,6 +3,7 @@ import Modal from 'components/UI/Modal';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { open_modal } from 'redux/modules/modal';
+import PublicModal from './PublicModal';
 
 function InputformLayout() {
   //redux

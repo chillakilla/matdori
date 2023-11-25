@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Inputform from './Inputform';
 import { open_modal } from 'redux/modules/modal';
 import { useDispatch } from 'react-redux';
+import publicModal from 'redux/modules/publicModal';
 
 function Modal() {
   //redux
@@ -10,7 +11,9 @@ function Modal() {
 
   const closeModal = () => {
     alert('정말 나가시겠어요?!');
-    dispatch(open_modal(false));
+    dispatch(closeModal(false));
+
+    //dispatch(open_modal(false));
   };
 
   const closeModal_outside = (event) => {
@@ -26,6 +29,7 @@ function Modal() {
     <BackGround onClick={(event) => closeModal_outside(event)}>
       <Container>
         <Button onClick={closeModal}>닫기</Button>
+
         <Inputform />
       </Container>
     </BackGround>
