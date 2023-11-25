@@ -5,11 +5,16 @@ import React, { useState } from 'react';
 import { auth } from '../firebase';
 import Feed from 'components/Feed';
 import { useDispatch, useSelector } from 'react-redux';
+import { getByUser } from 'redux/modules/filterConfig';
 
 function MyPage() {
+  const dispatch = useDispatch();
+
   const [isLoggedIn, setIsLoggedIn] = useState(auth.currentUser !== null);
 
   const currentEmail = useSelector((state) => state.currentEmail);
+
+  dispatch(getByUser(currentEmail));
 
   return (
     <>
@@ -39,6 +44,7 @@ function MyPage() {
           {/* <Feed>
             <NoResult>작성한 포스트가 없습니다.</NoResult>
           </Feed> */}
+
           <Feed />
         </FeedArea>
       </Container>
