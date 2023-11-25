@@ -2,9 +2,8 @@ import { auth, db, storage } from '../../firebase';
 import { addDoc, collection } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { add_feed } from 'redux/modules/feeds';
 import { open_modal } from 'redux/modules/modal';
 
 function Inputform() {
@@ -12,6 +11,9 @@ function Inputform() {
   const [content, setContent] = useState('');
   const [selectedFile, setSelectedFile] = useState('');
   const [CVS, setCVS] = useState('CU'); //편의점 이름
+
+  //
+  const currentEmail = useSelector((state) => state.currentEmail);
 
   //dispatch
   const dispatch = useDispatch();
@@ -61,7 +63,8 @@ function Inputform() {
                 date: formattedDate,
                 title,
                 image_url: uploadImageUrl,
-                user: '로그인한 사람 정보 출력'
+
+                user: currentEmail
               };
 
               //3. 파이어스토어에 데이터 저장
@@ -80,16 +83,19 @@ function Inputform() {
       >
         <StSection>
           <div>
-            <p>날짜</p>
+            <p>새 글 작성</p>
           </div>
 
+          <div>
+            <p>{currentEmail}</p>
+          </div>
           <StDiv>
             <p>제목</p>
             <TitleInput
               value={title}
               onChange={(event) => setTitle(event.target.value)}
-              placeholder="최대 20글자까지 작성가능합니다."
-              maxLength={20}
+              placeholder="제목을 입력해주세요."
+              maxLength={30}
             ></TitleInput>
           </StDiv>
           <StDiv>
@@ -114,11 +120,11 @@ function Inputform() {
         </StSection>
 
         <StSection>
-          <StDiv>
+          <FileUplod>
             <p>이미지 첨부</p>
-
-            <input type="file" name="fileSelect" onChange={handleFileSelect}></input>
-          </StDiv>
+            <input type="file" name="fileSelect" id="fileAttach" onChange={handleFileSelect}></input>
+            <label for="fileAttach">사진 첨부하기</label>
+          </FileUplod>
         </StSection>
         <BtnSection>
           <Button>등록하기</Button>
@@ -127,6 +133,34 @@ function Inputform() {
     </>
   );
 }
+
+const FileUplod = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+
+  & input {
+    //width: 0.1px;
+    //height: 0.1px;
+    //opacity: 0;
+    //overflow: hidden;
+    //position: absolute;
+    //z-index: -1;
+  }
+
+  & label {
+    border: 1px solid #d9e1e8;
+    background-color: #fff;
+    color: #7579e7;
+    border-radius: 10px;
+    padding: 8px 17px 8px 17px;
+    font-weight: 500;
+    font-size: 15px;
+    box-shadow: 1px 2px 3px 0px #f2f2f2;
+    outline: none;
+  }
+`;
 
 const StSection = styled.section`
   padding: 10px;
@@ -173,12 +207,13 @@ const TitleInput = styled.input`
 `;
 
 const Button = styled.button`
-  background-color: #a3d8f4;
+  background-color: #7579e7;
+  color: white;
   border: none;
   margin: 10px;
   padding: 8px;
   font-weight: 700;
-  border-radius: 12px;
+  border-radius: 10px;
   &:hover {
     border: 1px solid #7579e7;
     box-shadow: rgba(117, 121, 231, 0.4) 0px 0px 0px 3px;
