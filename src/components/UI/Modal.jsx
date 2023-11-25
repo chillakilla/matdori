@@ -9,11 +9,21 @@ function Modal() {
   const dispatch = useDispatch();
 
   const closeModal = () => {
+    alert('정말 나가시겠어요?!');
     dispatch(open_modal(false));
   };
 
+  const closeModal_outside = (event) => {
+    //event.target = 내가 지금 클릭한 곳
+    //event.currentTarget = onClick이 할당된 element(Background)
+    if (event.target === event.currentTarget) {
+      alert('정말 나가시겠어요?!');
+      dispatch(open_modal(false));
+    }
+  };
+
   return (
-    <BackGround>
+    <BackGround onClick={(event) => closeModal_outside(event)}>
       <Container>
         <Button onClick={closeModal}>닫기</Button>
         <Inputform />
@@ -30,13 +40,15 @@ const BackGround = styled.div`
   width: 100%;
   height: 1000px;
   top: 0;
+  border: none;
 `;
 
 const Container = styled.div`
-  width: 700px;
-  height: 700px;
+  //position: relative;
+  width: 560px;
+  height: 450px;
 
-  border: 1px solid black;
+  //border: 1px solid black;
 
   /*최상단 위치 */
   z-index: 100;
@@ -49,8 +61,8 @@ const Container = styled.div`
   transform: translate(-50%, -50%);
 
   background-color: white;
-  border: 5px solid #a3d8f4;
-  border-radius: 15px;
+
+  border-radius: 20px;
 `;
 
 const Button = styled.button`
