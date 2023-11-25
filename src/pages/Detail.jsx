@@ -81,15 +81,25 @@ const StBtnDiv = styled.div`
     color: white;
   }
 `;
-const StTextAreaForContent = styled.textarea`
+const StTextAreaForContent = styled.p`
   resize: none;
   width: 100%;
+  height: auto;
   border-radius: 10px;
   border-color: transparent;
   background-color: transparent;
+  white-space: pre-wrap;
   font-size: large;
 `;
 const StTextAreaForEdit = styled.textarea`
+  resize: none;
+  width: 100%;
+  min-height: 100px;
+  background-color: #ffc0cb1d;
+  border-radius: 10px;
+  font-size: large;
+`;
+const StTextAreaForTitleEdit = styled.textarea`
   resize: none;
   width: 100%;
   background-color: #ffc0cb1d;
@@ -146,6 +156,14 @@ function Detail() {
     setEditData({ ...editData, [field]: event.target.value });
   };
 
+  //lastlocation에 따라 수정/삭제 버튼을 조건부 렌더링 하기 위한 코드
+  const getQueryParam = (name) => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get(name);
+  };
+  const lastLocation = getQueryParam('lastlocation');
+  const isFromMyPage = lastLocation === '/mypage';
+
   return (
     <StDetailSection>
       <StAuthorDiv>
@@ -170,7 +188,8 @@ function Detail() {
 
         {isEditing ? (
           <>
-            <StTextAreaForEdit onChange={(event) => editChangeHndlr(event, 'title')} value={editData.title} />
+            <StTextAreaForTitleEdit onChange={(event) => editChangeHndlr(event, 'title')} value={editData.title} />
+            <img src={feed.image_url} alt="" />
             <StTextAreaForEdit
               autoFocus
               onChange={(event) => editChangeHndlr(event, 'content')}
@@ -180,17 +199,19 @@ function Detail() {
         ) : (
           <>
             <StTitleH2>{editData.title}</StTitleH2>
-            <StTitleH2>{editData.content}</StTitleH2>
+            <img src={feed.image_url} alt="" />
+            <StTextAreaForContent disabled>{editData.content}</StTextAreaForContent>
           </>
         )}
-        <img src={feed.image_url} alt="" />
         <br />
       </StMainArea>
       <p>문서id : {feed.id}(개발완료후 삭제할것)</p>
-      <StBtnDiv>
-        <button onClick={editBtnHndlr}>{isEditing ? '수정완료' : '수정'}</button>
-        <button onClick={deletBtnHndlr}>삭제</button>
-      </StBtnDiv>
+      {isFromMyPage && (
+        <StBtnDiv>
+          <button onClick={editBtnHndlr}>{isEditing ? '수정완료' : '수정'}</button>
+          <button onClick={deletBtnHndlr}>삭제</button>
+        </StBtnDiv>
+      )}
     </StDetailSection>
   );
 }
