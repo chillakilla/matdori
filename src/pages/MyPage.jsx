@@ -4,9 +4,12 @@ import Header from 'components/UI/Header';
 import React, { useState } from 'react';
 import { auth } from '../firebase';
 import Feed from 'components/Feed';
+import { useDispatch, useSelector } from 'react-redux';
 
 function MyPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(auth.currentUser !== null);
+
+  const currentEmail = useSelector((state) => state.currentEmail);
 
   return (
     <>
@@ -26,7 +29,7 @@ function MyPage() {
           </ProfileImg>
           <InfoWrapper>
             <Nickname>닉네임 / 이름</Nickname>
-            <Email>@jnonono</Email>
+            <Email>{currentEmail}</Email>
           </InfoWrapper>
         </Profile>
         <FeedArea>
