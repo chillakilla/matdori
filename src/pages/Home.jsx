@@ -6,11 +6,11 @@ import { auth } from '../firebase';
 import InputformLayout from 'components/UI/InputformLayout';
 
 function Home() {
-  const [isLoggedIn] = useState(auth.currentUser !== null);
+  const [isLoggedIn, setIsLoggedIn] = useState(auth.currentUser !== null);
 
   return (
     <>
-      <Header isLoggedIn={isLoggedIn} />
+      <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <span>홈입니다</span>
       <Sidebar />
       <InputformLayout />

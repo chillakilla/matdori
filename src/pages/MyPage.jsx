@@ -1,15 +1,30 @@
 import styled from 'styled-components';
-import ImgUpload from 'components/UI/ImgUpload';
+
 import Header from 'components/UI/Header';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { auth } from '../firebase';
 import Feed from 'components/Feed';
-import { useDispatch, useSelector } from 'react-redux';
 
 function MyPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(auth.currentUser !== null);
+  const [username, setUsername] = useState('');
+  const [useremail, setUseremail] = useState('');
+  const [emailverified, setEmailverified] = useState('');
 
-  const currentEmail = useSelector((state) => state.currentEmail);
+  useEffect(() => {
+    if (auth.currentUser) {
+      const getEmailVerified = auth.currentUser.emailVerified;
+      setEmailverified(getEmailVerified || '');
+
+      const getUserEmail = auth.currentUser.email;
+      setUseremail(getUserEmail || '비로그인 사용자');
+
+      const getUserName = auth.currentUser.displayName;
+      setUsername(getUserName || '비로그인 사용자');
+    }
+  }, []);
+
+  // const currentEmail = useSelector((state) => state.currentEmail);
 
   return (
     <>
@@ -17,7 +32,6 @@ function MyPage() {
       <Container>
         <Profile>
           <ProfileImg>
-            <ImgUpload />
             <EditImg>
               <svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -28,8 +42,10 @@ function MyPage() {
             </EditImg>
           </ProfileImg>
           <InfoWrapper>
-            <Nickname>닉네임 / 이름</Nickname>
-            <Email>{currentEmail}</Email>
+            <Nickname>{username}</Nickname>
+            <Email>{useremail}</Email>
+            <br />
+            <Email>{emailverified ? 'DONE' : 'NONE'}</Email>
           </InfoWrapper>
         </Profile>
         <FeedArea>

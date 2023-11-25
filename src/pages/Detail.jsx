@@ -107,6 +107,10 @@ function Detail() {
   const filteredFeed = feeds.filter((feed) => feed.id === params.id);
   const feed = filteredFeed[0];
   const [editText, setEditText] = useState(feed.content);
+  const [editTitle, setEditTitle] = useState(feed.title);
+
+  //제목+ 타이틀 한번에 수정
+  const [editData, setEditData] = useState({ ...feed });
 
   const deletBtnHndlr = () => {
     if (window.confirm('삭제할까요?')) {
@@ -117,17 +121,29 @@ function Detail() {
       return;
     }
   };
+
+  /**
+   * 혜민 수정
+   * 1. 제목 + 내용 2개 동시에 수정
+   * editBtnHndlr() / editChangeHndlr() 수정
+   */
+
   const editBtnHndlr = () => {
     if (isEditing) {
       const feedRef = doc(db, 'feeds', feed.id);
       updateDoc(feedRef, {
-        content: editText
+        content: editData.content,
+        title: editData.title
       });
     }
     setIsEditing((prev) => !prev);
   };
-  const editChangeHndlr = (e) => {
-    setEditText(e.target.value);
+
+  /**
+   * [대괄호] : 객체에서 키 동적 변경
+   */
+  const editChangeHndlr = (event, field) => {
+    setEditData({ ...editData, [field]: event.target.value });
   };
 
   return (
@@ -145,11 +161,29 @@ function Detail() {
       </StAuthorDiv>
 
       <StMainArea>
-        <StTitleH2>{feed.title}</StTitleH2>
+        {/**
+         * 혜민 수정
+         * 1. isEditing ? 수정화면 (StTextAreaForEdit) : 수정x 화면 (StTitleH2)
+         * 2. 수정 : 제목 + 내용 수정
+         * 3. 수정 후 : {editData.title}으로 수정사항 반영
+         */}
+
+        {isEditing ? (
+          <>
+            <StTextAreaForEdit onChange={(event) => editChangeHndlr(event, 'title')} value={editData.title} />
+            <StTextAreaForEdit
+              autoFocus
+              onChange={(event) => editChangeHndlr(event, 'content')}
+              value={editData.content}
+            />
+          </>
+        ) : (
+          <>
+            <StTitleH2>{editData.title}</StTitleH2>
+            <StTitleH2>{editData.content}</StTitleH2>
+          </>
+        )}
         <img src={feed.image_url} alt="" />
-        <br />
-        {!isEditing && <StTextAreaForContent disabled value={feed.content} />}
-        {isEditing && <StTextAreaForEdit onChange={editChangeHndlr} value={editText} />}
         <br />
       </StMainArea>
       <p>문서id : {feed.id}(개발완료후 삭제할것)</p>
