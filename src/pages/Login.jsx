@@ -5,6 +5,8 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndP
 import { auth } from '../firebase';
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import Header from 'components/UI/Header';
+import { useDispatch } from 'react-redux';
+import { current_Email } from 'redux/modules/currentEmail';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -14,10 +16,13 @@ const Login = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(auth.currentUser !== null);
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setIsLoggedIn(true);
+        dispatch(current_Email(user ? auth.currentUser.email : ''));
       } else {
         setIsLoggedIn(false);
       }
