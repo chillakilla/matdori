@@ -21,6 +21,7 @@ const Login = () => {
       } else {
         setIsLoggedIn(false);
       }
+      console.log(auth.currentUser);
     });
 
     return () => unsubscribe();
