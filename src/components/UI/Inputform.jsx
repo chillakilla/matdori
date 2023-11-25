@@ -24,7 +24,7 @@ function Inputform() {
   const handleUpload = async () => {
     //[파일선택] 버튼 안눌러서 선택한 파일 없는경우
     if (selectedFile === '') {
-      return false;
+      return '';
     }
     const imageRef = ref(storage, `${auth.currentUser.uid}/${selectedFile.name}`);
     try {
