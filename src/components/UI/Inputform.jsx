@@ -63,7 +63,6 @@ function Inputform() {
                 date: formattedDate,
                 title,
                 image_url: uploadImageUrl,
-
                 user: currentEmail
               };
 
