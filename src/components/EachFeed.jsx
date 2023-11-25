@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { doc, deleteDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 
 const StFeedDiv = styled.div`
   display: flex;
@@ -31,10 +33,15 @@ const StWriterDiv = styled.div`
   margin-bottom: 20px;
   border-bottom: 1px solid gray;
   padding: 10px;
+  position: relative;
   img {
     width: 50px;
     margin-right: 20px;
     border-radius: 100%;
+  }
+  button {
+    position: absolute;
+    right: 0px;
   }
 `;
 
@@ -78,12 +85,21 @@ const StDetailBtn = styled.button`
 function EachFeed({ feed }) {
   const navigate = useNavigate();
 
+  const deletBtnHndlr = () => {
+    if (window.confirm('삭제할까요?')) {
+      const feedRef = doc(db, 'feeds', feed.id);
+      deleteDoc(feedRef);
+    } else {
+      return;
+    }
+  };
+
   const feedClickHndlr = () => {
     navigate(`/detail/${feed.id}`);
   };
 
   return (
-    <StFeedDiv onClick={feedClickHndlr}>
+    <StFeedDiv>
       <StWriterDiv>
         <img
           src="https://global.discourse-cdn.com/turtlehead/optimized/2X/c/c830d1dee245de3c851f0f88b6c57c83c69f3ace_2_250x250.png"
@@ -92,6 +108,7 @@ function EachFeed({ feed }) {
         {/*
         <span>작성자 {feed.user}</span>
 */}
+        <button onClick={deletBtnHndlr}>삭제</button>
       </StWriterDiv>
       <StTitle>{feed.title}</StTitle>
       <br />
@@ -108,7 +125,7 @@ function EachFeed({ feed }) {
       {/* <p>작성일 : {feed.date}</p>
       <p>문서id : {feed.id}</p>
       <p>편의점 : {feed.CVS}</p> */}
-      <StDetailBtn>자세히 보기</StDetailBtn>
+      <StDetailBtn onClick={feedClickHndlr}>자세히 보기</StDetailBtn>
     </StFeedDiv>
   );
 }

@@ -58,7 +58,7 @@ const filterConfig = (state = initialState, action) => {
       return {
         field: 'CVS',
         compare: '==',
-        value: 'Emart'
+        value: '이마트24'
       };
     case GET_BY_USER:
       const userId = action.payload;
