@@ -60,7 +60,8 @@ function Inputform() {
                 CVS,
                 date: formattedDate,
                 title,
-                image_url: uploadImageUrl
+                image_url: uploadImageUrl,
+                user: '로그인한 사람 정보 출력'
               };
 
               //3. 파이어스토어에 데이터 저장

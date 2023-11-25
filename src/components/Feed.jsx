@@ -14,26 +14,10 @@ const StFeedSection = styled.section`
   width: 100%;
 `;
 
-//처음 피드들을 서버에서 받아오는 로직
 function Feed() {
   const filterConfig = useSelector((state) => state.filterConfig);
   const feeds = useSelector((state) => state.feeds);
   const dispatch = useDispatch();
-
-  //서버에서 자료 가져오는 첫번째 버전(아래 버전이 잘 안되면 이걸로라도...)
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const q = query(collection(db, 'feeds'));
-  //     const querySnapshot = await getDocs(q);
-  //     const initialFeeds = [];
-  //     querySnapshot.forEach((doc) => {
-  //       initialFeeds.push({ id: doc.id, ...doc.data() });
-  //     });
-  //     dispatch(setFeeds(initialFeeds));
-  //   };
-  //   fetchData();
-  // }, []);
 
   //서버에서 자료 가져오는 개선된 버전 -> 자료 수정/삭제/추가 에따라 실시간 업데이트
   //cf ) onSnapshot 은 비동기 작업이 아님--> async/await 미사용

@@ -11,7 +11,7 @@ const StFeedDiv = styled.div`
   width: 60%;
   min-width: 550px;
   align-items: flex-start;
-  cursor: pointer;
+  /* cursor: pointer; */
 
   margin: 10px;
   padding: 5px 20px 20px 20px;
@@ -42,6 +42,7 @@ const StWriterDiv = styled.div`
   button {
     position: absolute;
     right: 0px;
+    cursor: pointer;
   }
 `;
 
@@ -105,9 +106,9 @@ function EachFeed({ feed }) {
           src="https://global.discourse-cdn.com/turtlehead/optimized/2X/c/c830d1dee245de3c851f0f88b6c57c83c69f3ace_2_250x250.png"
           alt=""
         />
-        {/*
+
         <span>작성자 {feed.user}</span>
-*/}
+
         <button onClick={deletBtnHndlr}>삭제</button>
       </StWriterDiv>
       <StTitle>{feed.title}</StTitle>
