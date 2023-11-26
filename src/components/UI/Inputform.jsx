@@ -12,7 +12,6 @@ function Inputform() {
   const [selectedFile, setSelectedFile] = useState('');
   const [CVS, setCVS] = useState('CU'); //편의점 이름
 
-  //
   const currentEmail = useSelector((state) => state.currentEmail);
 
   //dispatch
@@ -28,7 +27,9 @@ function Inputform() {
     if (selectedFile === '') {
       return '';
     }
+
     const imageRef = ref(storage, `${auth.currentUser.uid}/${selectedFile.name}`);
+    //FileName = `${selectedFile.name}`;
     try {
       await uploadBytes(imageRef, selectedFile);
       // 저장된 image url :getDownloadURL(imageRef)

@@ -21,8 +21,6 @@ const publicModal = (state = initialState, action) => {
       return { ...state, isUse: false };
 
     case SHOWMODAL:
-      console.log('reducer', action.payload);
-      //const data = action.payload;
       return { ...state, ...action.payload };
 
     default:

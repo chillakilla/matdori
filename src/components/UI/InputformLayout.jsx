@@ -2,9 +2,9 @@ import React from 'react';
 import Modal from 'components/UI/Modal';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { openInputmodal, closeInputModal } from 'redux/modules/modal';
+import { openInputmodal } from 'redux/modules/modal';
 import PublicModal from './PublicModal';
-import publicModal, { closePublicModal, showPublicModal } from 'redux/modules/publicModal';
+import { closePublicModal, showPublicModal } from 'redux/modules/publicModal';
 
 function InputformLayout() {
   const modal = useSelector((state) => state.modal);

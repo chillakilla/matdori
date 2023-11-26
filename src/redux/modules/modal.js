@@ -17,11 +17,9 @@ const initialState = { isUseInput: false };
 const modal = (state = initialState, action) => {
   switch (action.type) {
     case CLOSEINPUTMODAL:
-      console.log('인풋닫기');
       return { ...state, isUseInput: false };
 
     case OPENINPUTMODAL:
-      console.log('인풋열기');
       return { ...state, isUseInput: true };
 
     default:
