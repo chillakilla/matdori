@@ -22,10 +22,6 @@ function InputformLayout() {
 
   return (
     <StSection>
-      <img
-        src="https://global.discourse-cdn.com/turtlehead/optimized/2X/c/c830d1dee245de3c851f0f88b6c57c83c69f3ace_2_250x250.png"
-        alt=""
-      />
       <Button onClick={showModal}>
         <div> 새 글 작성시 여기를 클릭하세요!</div>
       </Button>
@@ -48,6 +44,8 @@ const StSection = styled.div`
   border-bottom: 1px solid gray;
   padding: 10px;
 
+  border: none;
+
   img {
     width: 50px;
     margin-right: 20px;
@@ -61,17 +59,20 @@ const Button = styled.button`
   align-items: center;
 
   min-width: 550px;
-  //width: 100%;
-
+  width: 60.5%;
   background-color: transparent;
   cursor: pointer;
   border: 1px solid #7579e7;
-  border-radius: 7px;
-  min-height: 30px;
+  border-radius: 12px;
+  min-height: 40px;
+  padding-left: 7px;
 
   &:hover {
     border: 1px solid #7579e7;
     box-shadow: rgba(117, 121, 231, 0.4) 0px 0px 0px 3px;
+  }
+  & div {
+    color: #808080;
   }
 `;
 

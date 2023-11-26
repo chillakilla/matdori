@@ -62,6 +62,10 @@ const StGradientDiv = styled.div`
   background-image: linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 50%, rgb(255, 255, 255) 100%);
 `;
 
+const StPforContent = styled.p`
+  white-space: pre-wrap;
+`;
+
 const StFeedMainDiv = styled.div`
   display: flex;
   position: relative;
@@ -83,7 +87,7 @@ const StDetailBtn = styled.button`
   cursor: pointer;
 `;
 
-function EachFeed({ feed }) {
+function EachFeed({ feed, location }) {
   const navigate = useNavigate();
 
   const deletBtnHndlr = () => {
@@ -96,7 +100,7 @@ function EachFeed({ feed }) {
   };
 
   const feedClickHndlr = () => {
-    navigate(`/detail/${feed.id}`);
+    navigate(`/detail/${feed.id}?lastlocation=${location}`);
   };
 
   return (
@@ -107,7 +111,7 @@ function EachFeed({ feed }) {
           alt=""
         />
 
-        <span>작성자 {feed.user}</span>
+        <span>{feed.user}</span>
 
         <button onClick={deletBtnHndlr}>삭제</button>
       </StWriterDiv>
@@ -118,7 +122,7 @@ function EachFeed({ feed }) {
           <img src={feed.image_url} alt="" />
           <br />
 
-          <p>{feed.content}</p>
+          <StPforContent>{feed.content}</StPforContent>
           <br />
         </div>
         <StGradientDiv></StGradientDiv>
