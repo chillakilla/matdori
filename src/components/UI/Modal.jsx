@@ -1,19 +1,44 @@
-import React from 'react';
+import React, { Children } from 'react';
 import styled from 'styled-components';
 import Inputform from './Inputform';
 import { open_modal } from 'redux/modules/modal';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import publicModal from 'redux/modules/publicModal';
-
+import { showModal } from 'redux/modules/publicModal';
+import PublicModal from './PublicModal';
+import { closePublicModal } from 'redux/modules/publicModal';
+import { useNavigate } from 'react-router-dom';
 function Modal() {
-  //redux
+  const publicmodal = useSelector((state) => state.publicModal);
   const dispatch = useDispatch();
+  const navigator = useNavigate();
 
-  const closeModal = () => {
-    alert('정말 나가시겠어요?!');
-    dispatch(closeModal(false));
+  const openPublicModal = () => {
+    const goOut = () => {
+      dispatch(closePublicModal());
+      dispatch(open_modal(false)); //기존 모달
+      navigator('/');
+    };
 
-    //dispatch(open_modal(false));
+    const stayModal = () => {
+      dispatch(closePublicModal());
+    };
+
+    dispatch(
+      showModal({
+        isUse: true,
+        title: '😯 정말 나가시겠어요?',
+        message: '저장하지 않은 내용은 사라져요.',
+        btnMsg: '계속 작성하기',
+        btnFn: stayModal,
+        btnMsg2: '나가기',
+        btnFn2: goOut
+      })
+    );
+
+    //alert('정말 나가시겠어요?!');
+    //dispatch(closeModal(false));
+    //dispatch(open_modal(false)); //기존 모달
   };
 
   const closeModal_outside = (event) => {
@@ -26,13 +51,18 @@ function Modal() {
   };
 
   return (
-    <BackGround onClick={(event) => closeModal_outside(event)}>
-      <Container>
-        <Button onClick={closeModal}>닫기</Button>
+    /////최상단 모달 넣기
+    <>
+      {publicmodal.isUse && <PublicModal />}
 
-        <Inputform />
-      </Container>
-    </BackGround>
+      <BackGround onClick={(event) => closeModal_outside(event)}>
+        <Container>
+          <Button onClick={openPublicModal}>닫기</Button>
+
+          <Inputform />
+        </Container>
+      </BackGround>
+    </>
   );
 }
 
