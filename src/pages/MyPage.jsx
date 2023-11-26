@@ -6,24 +6,34 @@ import { auth } from '../firebase';
 import Feed from 'components/Feed';
 import { useDispatch, useSelector } from 'react-redux';
 import { getByUser } from 'redux/modules/filterConfig';
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { db } from '../firebase';
 
 function MyPage() {
   const dispatch = useDispatch();
-
   const [isLoggedIn, setIsLoggedIn] = useState(auth.currentUser !== null);
-
+  const [displayName, setDisplayName] = useState();
   // const currentEmail = useSelector((state) => state.currentEmail);
   console.log(auth.currentUser);
+
   const email = auth.currentUser.email;
   const userProfileImgUrl =
     auth.currentUser.photoURL === null
       ? 'https://firebasestorage.googleapis.com/v0/b/fir-e-9aec4.appspot.com/o/folder%2F_7fdc97b7-c89c-41b1-bd84-7cfb1b07a7d2.jpg?alt=media&token=e0c9e857-d8c8-49c2-931a-2b6fa45d8db0'
       : auth.currentUser.photoURL;
 
-  const displayName = auth.currentUser.displayName === null ? '닉네임' : auth.currentUser.displayName;
-
+  let userInfo = {};
   useEffect(() => {
     dispatch(getByUser(email));
+    const fetchTargetDoc = async () => {
+      const q = query(collection(db, 'users'), where('email', '==', email));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        userInfo = { ...doc.data() };
+      });
+      setDisplayName(auth.currentUser.displayName || userInfo.displayName || '이 글씨가 보이면 큰일난거임');
+    };
+    fetchTargetDoc();
   }, []);
 
   return (
