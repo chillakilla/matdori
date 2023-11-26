@@ -53,30 +53,26 @@ function Inputform() {
           event.preventDefault();
 
           try {
-            if (window.confirm('새글을 등록하시겠습니까?')) {
-              //1. 이미지 파일 업로드
-              const uploadImageUrl = await handleUpload();
+            //1. 이미지 파일 업로드
+            const uploadImageUrl = await handleUpload();
 
-              //2. 모달창에 입력된 새로운 데이터
-              const newData = {
-                email: 'test',
-                content,
-                CVS,
-                date: formattedDate,
-                title,
-                image_url: uploadImageUrl,
-                user: currentEmail
-              };
+            //2. 모달창에 입력된 새로운 데이터
+            const newData = {
+              email: 'test',
+              content,
+              CVS,
+              date: formattedDate,
+              title,
+              image_url: uploadImageUrl,
+              user: currentEmail
+            };
 
-              //3. 파이어스토어에 데이터 저장
-              const collectionRef = collection(db, 'feeds');
-              await addDoc(collectionRef, newData);
+            //3. 파이어스토어에 데이터 저장
+            const collectionRef = collection(db, 'feeds');
+            await addDoc(collectionRef, newData);
 
-              //4. 모달닫기
-              dispatch(closeInputModal());
-            } else {
-              return;
-            }
+            //4. 모달닫기
+            dispatch(closeInputModal());
           } catch (Error) {
             console.log('[form Error] (Inputform.jsx): ', Error);
           }
