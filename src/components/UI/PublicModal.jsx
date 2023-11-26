@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { closePublicModal } from 'redux/modules/publicModal';
-import { open_modal } from 'redux/modules/modal';
+import { closeInputModal } from 'redux/modules/modal';
 
 function PublicModal() {
   const { title, message, btnMsg, btnFn, btnMsg2, btnFn2 } = useSelector((state) => state.publicModal);
@@ -10,7 +10,7 @@ function PublicModal() {
 
   const closeModal = () => {
     dispatch(closePublicModal());
-    dispatch(open_modal(false)); //기존 모달
+    dispatch(closeInputModal()); //기존 모달
   };
 
   return (
@@ -21,8 +21,8 @@ function PublicModal() {
           <p>{message}</p>
         </TitieAndContent>
         <ButtonDiv>
-          {btnMsg && <button onClick={btnFn}>{btnMsg} </button>}
-          {btnMsg2 && <button onClick={btnFn2}>{btnMsg2} </button>}
+          {btnMsg && <FirstBtn onClick={btnFn}>{btnMsg} </FirstBtn>}
+          {btnMsg2 && <SecondtBtn onClick={btnFn2}>{btnMsg2} </SecondtBtn>}
         </ButtonDiv>
       </Container>
     </BackGround>
@@ -45,7 +45,7 @@ const Container = styled.div`
   height: 200px;
 
   /*최상단 위치 */
-  z-index: 150;
+  z-index: 999;
 
   /*중앙배치 */
   /*translate:본인 사이즈 기준 */
@@ -62,26 +62,51 @@ const TitieAndContent = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  padding: 50px;
+  padding-top: 50px;
+  padding-bottom: 20px;
   //padding-bottom: 10px;
   gap: 10px;
+  & h2 {
+    font-weight: 600;
+    font-size: 19px;
+    padding-bottom: 10px;
+  }
+  & p {
+    font-size: 14px;
+    white-space: pre-wrap;
+    min-height: 30px;
+  }
 `;
 
 const ButtonDiv = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
+  gap: 10px;
 `;
 
-const Button = styled.button`
-  position: absolute;
-  right: 10px;
-  top: 10px;
+const FirstBtn = styled.button`
+  border: 1px solid #7579e7;
+  background-color: #fff;
+  color: #7579e7;
+  border-radius: 10px;
+  padding: 6px 15px 6px 15px;
+  font-weight: 500;
+  font-size: 15px;
+  box-shadow: 1px 2px 3px 0px #f2f2f2;
+  outline: none;
+`;
 
-  border: none;
-
-  font-weight: 700;
-  border-radius: 12px;
+const SecondtBtn = styled.button`
+  border: 1px solid #7579e7;
+  background-color: #7579e7;
+  color: white;
+  border-radius: 10px;
+  padding: 6px 15px 6px 15px;
+  font-weight: 500;
+  font-size: 15px;
+  box-shadow: 1px 2px 3px 0px #f2f2f2;
+  outline: none;
 `;
 
 export default PublicModal;

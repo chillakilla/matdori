@@ -4,7 +4,7 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { open_modal } from 'redux/modules/modal';
+import { openInputmodal } from 'redux/modules/modal';
 
 function Inputform() {
   const [title, setTitle] = useState('');
@@ -71,7 +71,7 @@ function Inputform() {
               await addDoc(collectionRef, newData);
 
               //4. 모달닫기
-              dispatch(open_modal(false));
+              dispatch(openInputmodal());
             } else {
               return;
             }
@@ -90,7 +90,7 @@ function Inputform() {
           </div>
 
           <StDiv>
-            <p>편의점</p>
+            <p>🏬 편의점</p>
             <select value={CVS} onChange={(event) => setCVS(event.target.value)}>
               <option>CU</option>
               <option>GS</option>
@@ -174,6 +174,10 @@ const StDiv = styled.div`
   justify-content: flex-start;
   align-items: center;
   gap: 20px;
+
+  & p {
+    padding: 2px 0px;
+  }
 `;
 
 const StContent = styled.div`

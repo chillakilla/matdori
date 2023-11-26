@@ -7,15 +7,15 @@ export const closePublicModal = () => {
   return { type: CLOSEMODAL };
 };
 
-export const showModal = (payload) => {
+export const showPublicModal = (payload) => {
   return { type: SHOWMODAL, payload };
 };
 
 //initaiState
-const initaiState = { isUse: false, title: '제목', message: '메세지', btnMsg: '', btnFn: '', btnMsg2: '', btnFn2: '' };
+const initialState = { isUse: false, title: '제목', message: '메세지', btnMsg: '', btnFn: '', btnMsg2: '', btnFn2: '' };
 
 //reducer
-const publicModal = (state = initaiState, action) => {
+const publicModal = (state = initialState, action) => {
   switch (action.type) {
     case CLOSEMODAL:
       return { ...state, isUse: false };
@@ -23,7 +23,7 @@ const publicModal = (state = initaiState, action) => {
     case SHOWMODAL:
       console.log('reducer', action.payload);
       //const data = action.payload;
-      return { ...action.payload };
+      return { ...state, ...action.payload };
 
     default:
       return state;
