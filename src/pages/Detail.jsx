@@ -128,7 +128,7 @@ function Detail() {
   const dispatch = useDispatch();
   const publicmodal = useSelector((state) => state.publicModal);
 
-  //제목+ 타이틀 한번에 수정
+  //제목+ 타이틀 한번에 수정완료
   const [editData, setEditData] = useState({ ...feed });
 
   const deletBtnHndlr = () => {
