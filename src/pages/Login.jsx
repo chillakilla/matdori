@@ -30,7 +30,7 @@ const Login = () => {
       dispatch(current_Email(user ? user.email : ''));
     });
     return () => unsubscribe();
-  }, []);
+  }, [dispatch]);
 
   const onChange = (event) => {
     const { name, value } = event.target;
@@ -81,6 +81,7 @@ const Login = () => {
       const authProvider = initializeAuthProvider(provider);
       const result = await signInWithPopup(auth, authProvider);
       setIsLoggedIn(true);
+      localStorage.setItem('isLoggedIn', 'true');
       setError(successMessage);
       alert('로그인 되었습니다.');
       navigate('/');
