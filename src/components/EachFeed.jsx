@@ -7,7 +7,6 @@ import { db } from '../firebase';
 const StFeedDiv = styled.div`
   display: flex;
   flex-direction: column;
-  border: 2px solid transparent;
   width: 60%;
   min-width: 550px;
   align-items: flex-start;
@@ -15,7 +14,7 @@ const StFeedDiv = styled.div`
 
   margin: 10px;
   padding: 5px 20px 20px 20px;
-  border-radius: 15px 15px 15px 15px;
+  border-radius: 15px;
   background-color: white;
   border: 1px solid #7579e7;
   color: black;

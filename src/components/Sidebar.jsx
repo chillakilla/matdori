@@ -5,13 +5,15 @@ import { getAll, getCU, getGS, getSeven, getEmart } from 'redux/modules/filterCo
 
 const StSidebarDiv = styled.div`
   width: 120px;
-  height: 300px;
-  border: 1px solid black;
+  height: 200px;
+  border: 1px solid #7579e7;
+  border-radius: 15px;
 
   //나중에 헤더 생기면 위치 수정 필요!!
   position: fixed;
   top: 100px;
   left: 10px;
+  padding: 5px;
 
   //화면 가로폭이 좁아지면 사이드바 숨김
   @media (max-width: 850px) {
