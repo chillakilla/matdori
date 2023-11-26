@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { getAll, getCU, getGS, getSeven, getEmart } from 'redux/modules/filterConfig';
+import { getAll, getCU, getGS, getSeven, getEmart, getMinistop } from 'redux/modules/filterConfig';
 
 const StSidebarDiv = styled.div`
   width: 120px;
@@ -37,6 +37,9 @@ function Sidebar() {
   const onGSclick = () => {
     dispatch(getGS());
   };
+  const onMSclick = () => {
+    dispatch(getMinistop());
+  };
   const onEmartclick = () => {
     dispatch(getEmart());
   };
@@ -53,6 +56,7 @@ function Sidebar() {
         <li onClick={onCUclick}>CU</li>
         <li onClick={onSevElevclick}>세븐일레븐</li>
         <li onClick={onGSclick}>GS</li>
+        <li onClick={onMSclick}>미니스탑</li>
         <li onClick={onEmartclick}>이마트24</li>
       </ul>
     </StSidebarDiv>
