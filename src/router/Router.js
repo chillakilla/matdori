@@ -3,6 +3,7 @@ import Home from 'pages/Home';
 import Detail from 'pages/Detail';
 import Login from 'pages/Login';
 import MyPage from 'pages/MyPage';
+import SignUp from 'pages/SignUp';
 import Header from '../components/UI/Header';
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -24,6 +25,7 @@ const Router = () => {
         <Route path="/" element={<Home />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/mypage" element={<MyPage />} />
       </Routes>
     </BrowserRouter>
