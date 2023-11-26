@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import {
-  createUserWithEmailAndPassword,
   onAuthStateChanged,
   GoogleAuthProvider,
+  GithubAuthProvider,
   signInWithPopup,
   signInWithEmailAndPassword,
   signOut
@@ -71,20 +71,40 @@ const Login = () => {
     }
   };
 
-  const signWithGoogle = async (event) => {
+  const initializeAuthProvider = (provider) => {
+    const authProvider = new provider();
+    return authProvider;
+  };
+
+  const signWithProvider = async (event, provider, successMessage, errorMessage) => {
     try {
-      const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
+      const authProvider = initializeAuthProvider(provider);
+      const result = await signInWithPopup(auth, authProvider);
       setIsLoggedIn(true);
-      setError('로그인 성공');
-      alert('Google계정으로 로그인 되었습니다.');
+      setError(successMessage);
+      alert('로그인 되었습니다.');
       navigate('/');
     } catch (error) {
       setIsLoggedIn(false);
-      setError('로그인 중 오류가 발생했습니다.' + error.message);
+      setError(`${errorMessage} ${error.message}`);
       setShowError(true);
     }
   };
+
+  const signWithGoogle = (event) =>
+    signWithProvider(
+      event,
+      GoogleAuthProvider,
+      'Google 계정으로 로그인 되었습니다.',
+      'Google 로그인 중 오류가 발생했습니다.'
+    );
+  const signWithGithub = (event) =>
+    signWithProvider(
+      event,
+      GithubAuthProvider,
+      'Github 계정으로 로그인 되었습니다.',
+      'Github 로그인 중 오류가 발생했습니다.'
+    );
 
   return (
     <>
@@ -118,6 +138,7 @@ const Login = () => {
               <>
                 <LoginButton onClick={signIn}>로그인</LoginButton>
                 <LoginButton onClick={signWithGoogle}>Google 로그인</LoginButton>
+                <LoginButton onClick={signWithGithub}>Github 로그인</LoginButton>
               </>
             )}
           </ButtonContainer>

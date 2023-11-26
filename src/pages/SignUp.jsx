@@ -15,11 +15,22 @@ const SignUp = () => {
 
   const handleSignUp = async (event) => {
     event.preventDefault();
+
     if (!isValidEmail(credentials.email)) {
       setError('올바른 형식의 이메일이 아닙니다.');
       setShowError(true);
       return;
     }
+
+    const uppercaseRagex = /[A-Z]/;
+    const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+
+    if (!uppercaseRagex.test(credentials.password) || !specialCharRegex.test(credentials.password)) {
+      setError('비밀번호는 대문자와 특수문자를 포함해야 합니다.');
+      setShowError(true);
+      return;
+    }
+
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, credentials.email, credentials.password);
       const user = userCredential.user;
@@ -69,7 +80,9 @@ const SignUp = () => {
                 name="password"
                 onChange={onChange}
                 required
-                placeholder="대문자, 숫자, 특수문자 포함 최소 8자 이상"
+                placeholder="최소 8자 ~ 최대 16자"
+                minLength={8}
+                maxLength={16}
               ></Input>
             </PwInputContainer>
             <InputContainer>
