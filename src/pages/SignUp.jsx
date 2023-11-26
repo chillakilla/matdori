@@ -3,13 +3,16 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 import { getFirestore, setDoc, doc } from 'firebase/firestore';
+import { current_Email } from 'redux/modules/currentEmail';
 
 const SignUp = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '', displayName: '' });
   const [error, setError] = useState('');
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
@@ -40,6 +43,7 @@ const SignUp = () => {
         email: credentials.email,
         displayName: credentials.displayName
       });
+      dispatch(current_Email(credentials.email));
 
       alert('회원가입을 환영합니다.');
       navigate('/');
