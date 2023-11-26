@@ -241,12 +241,12 @@ const LoginButton = styled.button`
     color: #fff;
     background: #7579e7;
   }
-  &:nth-child(2) {
+  &:nth-child(3) {
     position: relative;
     color: #333;
     background: #e6e6e6;
   }
-  &:nth-child(2)::after {
+  &:nth-child(3)::after {
     content: '';
     position: absolute;
     top: 50%;
@@ -257,12 +257,12 @@ const LoginButton = styled.button`
     height: 24px;
     background: url(${google});
   }
-  &:nth-child(3) {
+  &:nth-child(4) {
     position: relative;
     color: #fff;
     background: #333;
   }
-  &:nth-child(3)::after {
+  &:nth-child(4)::after {
     content: '';
     position: absolute;
     top: 50%;
