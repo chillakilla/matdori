@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { getAll } from 'redux/modules/filterConfig';
 
 function Home() {
-  const [isLoggedIn] = useState(auth.currentUser !== null);
+  const [isLoggedIn, setIsLoggedIn] = useState(auth.currentUser !== null);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAll());
@@ -16,7 +16,7 @@ function Home() {
 
   return (
     <>
-      <Header isLoggedIn={isLoggedIn} />
+      <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <span>홈입니다</span>
       <Sidebar />
       <InputformLayout />

@@ -1,21 +1,18 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { auth } from '../../firebase';
-import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 
 const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
   const location = useLocation();
-
-  const isMypage = location.pathname === '/mypage';
+  const isMyPage = location.pathname === '/mypage';
 
   const logOut = async () => {
     try {
       await signOut(auth);
       setIsLoggedIn(false);
-      console.log(setIsLoggedIn);
       alert('로그아웃 되었습니다.');
       navigate('/');
     } catch (error) {
@@ -35,10 +32,12 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
       <ButtonContainer>
         {isLoggedIn ? (
           <>
-            <Link to="/mypage">
-              <Button>{isMypage ? '홈으로' : '내 페이지'}</Button>
+            <Link to={isMyPage ? '/' : '/mypage'}>
+              <Button>{isMyPage ? '홈으로' : '내 페이지'}</Button>
             </Link>
-            <Button onClick={logOut}>로그아웃</Button>
+            <Link>
+              <Button onClick={logOut}>로그아웃</Button>
+            </Link>
           </>
         ) : (
           <>

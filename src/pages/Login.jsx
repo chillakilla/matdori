@@ -1,104 +1,67 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  signOut
+} from 'firebase/auth';
 import { auth } from '../firebase';
-import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import Header from 'components/UI/Header';
 import { useDispatch } from 'react-redux';
 import { current_Email } from 'redux/modules/currentEmail';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [credentials, setCredentials] = useState({ email: '', password: '' });
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [showError, setShowError] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(auth.currentUser !== null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setIsLoggedIn(true);
-        dispatch(current_Email(user ? auth.currentUser.email : ''));
-      } else {
-        setIsLoggedIn(false);
-      }
-      console.log(auth.currentUser);
+      setIsLoggedIn(!!user);
+      dispatch(current_Email(user ? user.email : ''));
     });
-
     return () => unsubscribe();
   }, []);
 
   const onChange = (event) => {
-    const {
-      target: { name, value }
-    } = event;
-    if (name === 'email') {
-      setEmail(value);
-    }
-    if (name === 'password') {
-      setPassword(value);
-    }
+    const { name, value } = event.target;
+    setCredentials((prev) => ({ ...prev, [name]: value }));
   };
 
-  const isValidEmail = (email) => {
-    const emailRagex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRagex.test(email);
-  };
+  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-  const signUp = async (event) => {
+  const handleAuth = async (event, authFunction, successMessage) => {
     event.preventDefault();
-
-    try {
-      const signUpCredential = await createUserWithEmailAndPassword(auth, email, password);
-      console.log('signUp', signUpCredential.user);
-
-      setIsLoggedIn(true);
-      alert('회원가입을 환영합니다.');
-      setError('회원가입이 완료되었습니다.');
-      navigate('/');
-    } catch (error) {
-      console.error('에러가 발생했습니다', error.message);
-      setIsLoggedIn(false);
-      setError('회원가입 중 오류가 발생했습니다.');
-      setShowError(true);
-    }
-  };
-
-  const signIn = async (event) => {
-    event.preventDefault();
-    if (!email || !password) {
-      setError('이메일과 비밀번호를 입력해주세요.');
-      setShowError(true);
-      return;
-    }
-
-    if (!isValidEmail(email)) {
+    if (authFunction === signInWithEmailAndPassword && !isValidEmail(credentials.email)) {
       setError('올바른 형식의 이메일이 아닙니다.');
       setShowError(true);
       return;
     }
     try {
-      const signInCredential = await signInWithEmailAndPassword(auth, email, password);
-
-      console.log('SignIn', signInCredential.user);
+      const userCredential = await authFunction(auth, credentials.email, credentials.password);
       setIsLoggedIn(true);
-      setError('로그인 성공!');
-      alert('로그인 되었습니다.');
+      alert(successMessage);
       navigate('/');
     } catch (error) {
-      console.error('로그인 중 오류', error.message);
       setIsLoggedIn(false);
-      setError('로그인 중 오류가 발생했습니다.');
+      setError(`${error.message}`);
       setShowError(true);
     }
   };
+
+  const signUp = async (event) => handleAuth(event, createUserWithEmailAndPassword, '회원가입을 환영합니다.');
+  const signIn = async (event) => handleAuth(event, signInWithEmailAndPassword, '로그인 성공');
   const logOut = async (event) => {
     event.preventDefault();
-
     try {
       await signOut(auth);
       setIsLoggedIn(false);
@@ -113,15 +76,13 @@ const Login = () => {
     try {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
-      console.log('google sign in', result.user);
       setIsLoggedIn(true);
       setError('로그인 성공');
       alert('Google계정으로 로그인 되었습니다.');
       navigate('/');
     } catch (error) {
-      console.log('google sign in error', error.message);
       setIsLoggedIn(false);
-      setError('로그인 중 오류가 발생했습니다.');
+      setError('로그인 중 오류가 발생했습니다.' + error.message);
       setShowError(true);
     }
   };
@@ -137,7 +98,7 @@ const Login = () => {
               <label>Email : &nbsp;</label>
               <Input
                 type="email"
-                value={email}
+                value={credentials.email}
                 name="email"
                 onChange={onChange}
                 required
@@ -147,7 +108,7 @@ const Login = () => {
             </IdContainer>
             <PasswordContainer>
               <label>Password : &nbsp;</label>
-              <Input type="password" value={password} name="password" onChange={onChange} required></Input>
+              <Input type="password" value={credentials.password} name="password" onChange={onChange} required></Input>
             </PasswordContainer>
             <ErrorTextContainer>{showError && <ErrorText>{error}</ErrorText>}</ErrorTextContainer>
           </Form>
