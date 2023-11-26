@@ -67,7 +67,7 @@ const HeaderContainer = styled.div`
   right: 0;
   z-index: 1000;
 
-  border-bottom: 1px solid black; // 구분 짓기 위해서 임시용
+  border-bottom: 1px solid #7579e7;
 `;
 
 const Logo = styled.h1`
