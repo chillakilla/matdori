@@ -2,30 +2,42 @@ import React from 'react';
 import Modal from 'components/UI/Modal';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { open_modal } from 'redux/modules/modal';
+import { openInputmodal } from 'redux/modules/modal';
+import PublicModal from './PublicModal';
+import { closePublicModal, showPublicModal } from 'redux/modules/publicModal';
 
 function InputformLayout() {
-  //redux
-  const feeds = useSelector((state) => state.addNewFeed);
   const modal = useSelector((state) => state.modal);
+  const publicModal = useSelector((state) => state.publicModal);
   const currentEmail = useSelector((state) => state.currentEmail);
   const dispatch = useDispatch();
 
-  const showModal = () => {
-    //로그인 여부 체크 (자료형 false 반환 : "",null,undefined,0 NaN)
-    if (!currentEmail) {
-      alert('로그인하셔야 새글 작성이 가능합니다.');
-      return;
-    }
-    dispatch(open_modal(true));
+  const openModal = () => {
+    dispatch(openInputmodal());
   };
+
+  const openModal_NOLogin = () => {
+    dispatch(
+      showPublicModal({
+        isUse: true,
+        title: '⭐로그인 필요⭐',
+        message: '새 글 작성은 로그인 필요해요.',
+        btnMsg: '확인',
+        btnFn: () => dispatch(closePublicModal())
+      })
+    );
+  };
+
+  const isUserLogIn = Boolean(currentEmail);
+  const handleClick = isUserLogIn ? openModal : openModal_NOLogin;
 
   return (
     <StSection>
-      <Button onClick={showModal}>
+      <Button onClick={handleClick}>
         <div> 새 글 작성시 여기를 클릭하세요!</div>
       </Button>
-      {modal && <Modal />}
+      {!isUserLogIn && publicModal.isUse && <PublicModal />}
+      {isUserLogIn && modal.isUseInput && <Modal />}
     </StSection>
   );
 }

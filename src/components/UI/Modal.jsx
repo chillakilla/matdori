@@ -1,34 +1,63 @@
-import React from 'react';
+import React, { Children } from 'react';
 import styled from 'styled-components';
 import Inputform from './Inputform';
-import { open_modal } from 'redux/modules/modal';
-import { useDispatch } from 'react-redux';
+import { openInputmodal, closeInputModal } from 'redux/modules/modal';
+import { useDispatch, useSelector } from 'react-redux';
+import { showPublicModal } from 'redux/modules/publicModal';
+import PublicModal from './PublicModal';
+import { closePublicModal } from 'redux/modules/publicModal';
+import { useNavigate } from 'react-router-dom';
 
 function Modal() {
-  //redux
+  const publicmodal = useSelector((state) => state.publicModal);
   const dispatch = useDispatch();
+  const navigator = useNavigate();
 
-  const closeModal = () => {
-    alert('정말 나가시겠어요?!');
-    dispatch(open_modal(false));
+  const openPublicModal = () => {
+    const goOut = () => {
+      dispatch(closePublicModal());
+      dispatch(closeInputModal()); //기존 모달
+      navigator('/');
+    };
+
+    const stayModal = () => {
+      dispatch(closePublicModal());
+    };
+
+    dispatch(
+      showPublicModal({
+        isUse: true,
+        title: '😯 정말 나가시겠어요?',
+        message: '저장하지 않은 내용은 사라져요.',
+        btnMsg: '계속 작성',
+        btnFn: stayModal,
+        btnMsg2: '나가기',
+        btnFn2: goOut
+      })
+    );
   };
 
   const closeModal_outside = (event) => {
     //event.target = 내가 지금 클릭한 곳
     //event.currentTarget = onClick이 할당된 element(Background)
     if (event.target === event.currentTarget) {
-      alert('정말 나가시겠어요?!');
-      dispatch(open_modal(false));
+      openPublicModal();
     }
   };
 
   return (
-    <BackGround onClick={(event) => closeModal_outside(event)}>
-      <Container>
-        <Button onClick={closeModal}>닫기</Button>
-        <Inputform />
-      </Container>
-    </BackGround>
+    /////최상단 모달 넣기
+    <>
+      {publicmodal.isUse && <PublicModal />}
+
+      <BackGround onClick={(event) => closeModal_outside(event)}>
+        <Container>
+          <Button onClick={openPublicModal}>닫기</Button>
+
+          <Inputform />
+        </Container>
+      </BackGround>
+    </>
   );
 }
 

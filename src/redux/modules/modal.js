@@ -1,19 +1,26 @@
 //1.action item
-const OPEN_MODAL = 'OPEN_MODAL';
-
+const OPENINPUTMODAL = 'OPENINPUTMODAL';
+const CLOSEINPUTMODAL = 'CLOSEINPUTMODAL';
 //2.action creator
-export const open_modal = (payload) => {
-  return { type: OPEN_MODAL, payload };
+export const closeInputModal = () => {
+  return { type: CLOSEINPUTMODAL };
+};
+
+export const openInputmodal = () => {
+  return { type: OPENINPUTMODAL };
 };
 
 //3. initialState
-const initialState = false;
+const initialState = { isUseInput: false };
 
 //4. reducer
 const modal = (state = initialState, action) => {
   switch (action.type) {
-    case OPEN_MODAL:
-      return (state = action.payload);
+    case CLOSEINPUTMODAL:
+      return { ...state, isUseInput: false };
+
+    case OPENINPUTMODAL:
+      return { ...state, isUseInput: true };
 
     default:
       return state;
