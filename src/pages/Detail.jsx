@@ -221,6 +221,7 @@ function Detail() {
           </>
         )}
         collection(db, 'feeds')
+        {/* 223번 코드 지워야함 */}
         <br />
       </StMainArea>
 
