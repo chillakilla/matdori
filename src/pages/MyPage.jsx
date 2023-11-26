@@ -77,7 +77,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   width: 1080px;
-  margin: 0 auto;
+  margin: 60px auto 0;
   padding: 40px 0;
 `;
 const Profile = styled.div`
@@ -123,12 +123,13 @@ const FeedArea = styled.div`
   padding: 30px 20px;
   background-color: white;
   box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.06);
-  border-radius: 20px;
+  border-radius: 8px;
 `;
 const FeedTitleArea = styled.div`
   width: 100%;
   height: auto;
   border-bottom: 1px solid #ededed;
+  margin-bottom: 20px;
 `;
 const FeedTitle = styled.div`
   width: 146px;

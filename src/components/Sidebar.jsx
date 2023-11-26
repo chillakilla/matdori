@@ -2,27 +2,141 @@ import React from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { getAll, getCU, getGS, getSeven, getEmart, getMinistop } from 'redux/modules/filterConfig';
+import cu from '../assets/cu.png';
+import gs25 from '../assets/gs25.png';
+import seven from '../assets/seven.png';
+import ministop from '../assets/ministop.png';
+import emart24 from '../assets/emart24.png';
 
 const StSidebarDiv = styled.div`
-  width: 120px;
-  height: 200px;
-  border: 1px solid #7579e7;
+  width: 240px;
+  height: auto;
+  background: #ffffff;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.06);
   border-radius: 15px;
 
   //나중에 헤더 생기면 위치 수정 필요!!
   position: fixed;
   top: 100px;
-  left: 10px;
-  padding: 5px;
+  left: 50%;
+  transform: translateX(-580px);
+  padding: 20px 0;
 
+  @media (max-width: 1200px) {
+    left: 10px;
+    transform: unset;
+  }
   //화면 가로폭이 좁아지면 사이드바 숨김
   @media (max-width: 850px) {
     display: none;
   }
 
+  p {
+    color: #7579e7;
+    padding: 0 20px;
+  }
   li {
     cursor: pointer;
-    margin-top: 10px;
+    padding: 14px 20px;
+    transition: all 0.2s;
+  }
+  li:nth-child(2) {
+    position: relative;
+  }
+  li:nth-child(2)::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    display: block;
+    width: 34.105px;
+    height: 24px;
+    background: url(${cu}) no-repeat;
+  }
+  li:nth-child(3) {
+    position: relative;
+  }
+  li:nth-child(3)::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    display: block;
+    width: 73px;
+    height: 22px;
+    background: url(${seven}) no-repeat;
+  }
+  li:nth-child(4) {
+    position: relative;
+  }
+  li:nth-child(4)::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    display: block;
+    width: 40px;
+    height: 12.903px;
+    background: url(${gs25}) no-repeat;
+  }
+  li:nth-child(5) {
+    position: relative;
+  }
+  li:nth-child(5)::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    display: block;
+    width: 34px;
+    height: 20px;
+    background: url(${ministop}) no-repeat;
+  }
+  li:nth-child(6) {
+    position: relative;
+  }
+  li:nth-child(6)::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    display: block;
+    width: 50px;
+    height: 25px;
+    background: url(${emart24}) no-repeat;
+  }
+  li:nth-child(1):hover {
+    background: #f1f4fd;
+    font-weight: 500;
+  }
+  li:nth-child(2):hover {
+    color: #652b90;
+    font-weight: 500;
+  }
+  li:nth-child(3):hover {
+    background: #0ba94a;
+    color: #ee8200;
+    font-weight: 500;
+  }
+  li:nth-child(4):hover {
+    background: #1587ff;
+    color: #b9fffc;
+    font-weight: 500;
+  }
+  li:nth-child(5):hover {
+    background: #ffcf10;
+    color: #1846a5;
+    font-weight: 500;
+  }
+  li:nth-child(6):hover {
+    background: #767676;
+    color: #ffb035;
+    font-weight: 500;
   }
 `;
 
@@ -53,7 +167,7 @@ function Sidebar() {
       <br />
       <ul>
         <li onClick={onAllclick}>전체보기</li>
-        <li onClick={onCUclick}>CU</li>
+        <li onClick={onCUclick}>CU </li>
         <li onClick={onSevElevclick}>세븐일레븐</li>
         <li onClick={onGSclick}>GS</li>
         <li onClick={onMSclick}>미니스탑</li>

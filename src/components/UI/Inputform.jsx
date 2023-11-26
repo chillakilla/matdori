@@ -85,11 +85,11 @@ function Inputform() {
           </div>
 
           <div>
-            <NewFeed>{currentEmail}</NewFeed>
+            <p>{currentEmail}</p>
           </div>
 
           <StDiv>
-            <p>🏬 편의점 </p>
+            <span>🏪 편의점 선택</span>
             <select value={CVS} onChange={(event) => setCVS(event.target.value)}>
               <option>CU</option>
               <option>GS</option>
@@ -110,10 +110,10 @@ function Inputform() {
           <StContent
             placeholder="내용을 입력해주세요"
             value={content}
-            contentEditable={true}
-            onInput={(event) => {
-              //setContent(event.currentTarget.value); //onChange event시 사용
-              setContent(event.currentTarget.textContent);
+            //contentEditable={true}
+            onChange={(event) => {
+              setContent(event.currentTarget.value); //onChange event시 사용
+              // setContent(event.currentTarget.textContent);
             }}
           ></StContent>
 
@@ -149,24 +149,28 @@ const FileUplod = styled.div`
     border: 1px solid #7579e7;
     background-color: #fff;
     color: #7579e7;
-    border-radius: 10px;
-    padding: 6px 15px 6px 15px;
+    border-radius: 8px;
+    padding: 6px 14px;
     font-weight: 500;
-    font-size: 15px;
-    box-shadow: 1px 2px 3px 0px #f2f2f2;
+    font-size: 14px;
     outline: none;
   }
 `;
 
 const StSection = styled.section`
-  padding-top: 5px;
-  margin: 20px;
+  margin: 30px 20px;
   & div {
     padding-bottom: 10px;
   }
 
   & p {
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 200;
+    color: #bbb;
+    text-align: left;
+  }
+  & select {
+    height: 24px;
   }
 `;
 
@@ -181,25 +185,24 @@ const StDiv = styled.div`
   }
 `;
 
-const StContent = styled.div`
+const StContent = styled.textarea`
   min-height: 17vh;
   max-height: 30vh;
   overflow-y: auto;
-  // padding: 0px 8px;
   box-sizing: content-box;
   outline: none;
   line-height: 1.6em;
+  margin-bottom: 20px;
   font-size: 15px;
   word-break: keep-all;
 
-  //resize: none;
-  //width: 100%;
+  resize: none;
+  width: 100%;
+  border: none;
+  color: #555;
 
-  &:empty:before {
-    content: attr(placeholder);
-    display: block; //플레이스 홀더가 보이도록 설정
-    color: #808080;
-    font-size: 20px;
+  &::placeholder {
+    color: #bbb;
   }
 `;
 const BtnSection = styled.div`
@@ -213,31 +216,37 @@ const TitleInput = styled.input`
   width: 100%;
   outline: none;
   font-size: 20px;
+  margin-top: 8px;
   margin-bottom: 8px;
   padding-bottom: 10px;
   border: none;
   font-weight: 500;
-  border-bottom: 1px solid #808080;
+  border-bottom: 1px solid #ededed;
+
+  &::placeholder {
+    color: #bbb;
+  }
 `;
 
 const Button = styled.button`
+  width: 100%;
+  height: 40px;
+  margin-top: 10px;
+  font-weight: 600;
+  border-radius: 8px;
+  font-size: 15px;
   background-color: #7579e7;
   color: white;
-  border: none;
-  padding: 8px;
-  font-weight: 600;
-  border-radius: 10px;
-  width: 100%;
-  font-size: 15px;
   &:hover {
     border: 1px solid #7579e7;
     box-shadow: rgba(117, 121, 231, 0.4) 0px 0px 0px 3px;
   }
 `;
 
-const NewFeed = styled.p`
+const NewFeed = styled.h4`
   text-align: center;
-  padding: 10px;
+  font-weight: 600;
+  font-size: 18px;
 `;
 
 export default Inputform;

@@ -7,35 +7,32 @@ import { db } from '../firebase';
 import { useNavigate } from 'react-router-dom';
 import { closePublicModal, showPublicModal } from 'redux/modules/publicModal';
 import PublicModal from 'components/UI/PublicModal';
+import smile from '../assets/smile.svg';
 
 const StDetailSection = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 100%;
-  padding: 10px;
-  min-width: 700px;
-  margin: 60px auto;
+  width: 640px;
+  padding: 30px;
+  margin: 100px auto 0;
+  background: #fff;
+  border-radius: 16px;
 `;
 
 const StAuthorDiv = styled.div`
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  /* background-color: #9ab3f5; */
-  border: 2px solid #9ab3f5;
-  width: 80%;
-  padding: 10px;
-  font-size: larger;
-  border-radius: 10px;
+  width: 100%;
+  padding-bottom: 15px;
+  border-radius: 8px;
   margin: 0 0 20px 0;
   position: relative;
+  border-bottom: 1px solid #ededed;
   img {
     margin-right: 10px;
-    width: 60px;
-    height: 60px;
-    border-radius: 100%;
+    width: 34px;
+    height: 34px;
   }
 `;
 const StDivForNameAndStore = styled.div`
@@ -43,76 +40,78 @@ const StDivForNameAndStore = styled.div`
   flex-direction: column;
   gap: 5px;
   span {
-    font-size: 17px;
+    font-size: 14px;
+    color: #999;
   }
 `;
 const StdateSpan = styled.span`
   position: absolute;
   right: 10px;
-  font-size: 15px;
+  font-size: 14px;
+  color: #999;
 `;
 const StTitleH2 = styled.h2`
-  font-size: 30px;
-  padding-bottom: 10px;
-  /* position: absolute; */
-  left: 0px;
+  padding-bottom: 20px;
+  font-size: 24px;
 `;
 const StMainArea = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 70%;
+  width: 100%;
 `;
 const StBtnDiv = styled.div`
   display: flex;
   justify-content: space-around;
   width: 100%;
-  margin-top: 50px;
+  margin-top: 20px;
   button {
     padding: 0.3rem;
-    width: 100px;
+    height: 40px;
     cursor: pointer;
     font-size: large;
-    border-radius: 20px;
+    border-radius: 8px;
     border-color: transparent;
   }
   button:first-of-type {
-    background-color: #9ab3f5;
+    background-color: #dddddd;
+    width: calc(50% - 5px);
+    color: #333;
   }
   button:last-of-type {
-    background-color: #7579e7;
+    background-color: #ff5353;
     color: white;
+    width: calc(50% - 5px);
   }
 `;
 const StTextAreaForContent = styled.p`
-  resize: none;
   width: 100%;
-  min-width: 500px;
   height: auto;
-  border-radius: 10px;
-  border-color: transparent;
-  background-color: transparent;
+  margin-top: 15px;
+  line-height: 1.6;
+  color: #333;
   white-space: pre-wrap;
-  font-size: large;
 `;
 const StTextAreaForEdit = styled.textarea`
   resize: none;
   width: 100%;
-  min-width: 500px;
-
   min-height: 100px;
-  background-color: #ffc0cb1d;
-  border-radius: 10px;
+  margin-top: 15px;
+  border-radius: 8px;
   border-color: transparent;
-  font-size: large;
+  line-height: 1.6;
+  font-size: 16px;
+  color: #555;
 `;
 const StTextAreaForTitleEdit = styled.textarea`
   resize: none;
   width: 100%;
-  background-color: #ffc0cb1d;
-  border-radius: 10px;
+  height: 40px;
+  margin-bottom: 20px;
+  border-radius: 8px;
   border-color: transparent;
-
-  font-size: large;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1.6;
 `;
 
 function Detail() {
@@ -185,10 +184,7 @@ function Detail() {
   return (
     <StDetailSection>
       <StAuthorDiv>
-        <img
-          src="https://global.discourse-cdn.com/turtlehead/optimized/2X/c/c830d1dee245de3c851f0f88b6c57c83c69f3ace_2_250x250.png"
-          alt=""
-        />
+        <img src={smile} alt="" />
         <StDivForNameAndStore>
           <p>{feed.user}</p>
           <span>편의점 : {feed.CVS}</span>
@@ -220,7 +216,6 @@ function Detail() {
             <StTextAreaForContent disabled>{editData.content}</StTextAreaForContent>
           </>
         )}
-        collection(db, 'feeds')
         <br />
       </StMainArea>
 

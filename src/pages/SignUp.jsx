@@ -120,16 +120,19 @@ const LoginContainer = styled.div`
 `;
 
 const FormContainer = styled.div`
-  width: 500px;
-  height: 400px;
+  width: 440px;
+  height: auto;
+  padding: 40px 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  border-radius: 16px;
+  background-color: #fff;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
 `;
 
 const Title = styled.h2`
-  font-size: 36px;
+  font-size: 20px;
   font-weight: bold;
   margin-bottom: 20px;
 `;
@@ -138,53 +141,65 @@ const InputForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 `;
 
 const InputContainer = styled.div`
   font-weight: bold;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  label {
+    font-weight: normal;
+    color: #777;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
 `;
 const PwInputContainer = styled.div`
-  font-weight: bold;
-  padding: 10px;
-  transform: translateX(-4.8%);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  label {
+    font-weight: normal;
+    color: #777;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
 `;
 const Input = styled.input`
   padding: 5px;
+  border-radius: 8px;
+  border: 1px solid #c7c7c7;
+  height: 40px;
+  margin-bottom: 10px;
+  font-size: 16px;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   gap: 10px;
   margin: 10px;
+  width: 100%;
 `;
 
 const LoginButton = styled.button`
-  width: 80px;
+  width: 100%;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 10px;
-  color: white;
-  background-color: black;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  &:hover {
-    background-color: white;
-    color: black;
-  }
-  &:active {
-    transform: scale(1.1);
-  }
+  font-size: 16px;
+  color: #fff;
+  background: #7579e7;
 `;
 
 const ErrorTextContainer = styled.div`
   width: max-content;
-  height: 40px;
 `;
 
 const ErrorText = styled.p`
   color: red;
-  margin-top: 20px;
+  margin-bottom: 0 10px;
 `;
 
 export default SignUp;

@@ -35,15 +35,15 @@ const BackGround = styled.div`
   z-index: 100;
   position: fixed;
   width: 100%;
-  height: 1000px;
+  height: 100vh;
   top: 0;
   border: none;
 `;
 
 const Container = styled.div`
-  width: 300px;
+  width: 400px;
   height: 200px;
-
+  padding: 20px;
   /*최상단 위치 */
   z-index: 999;
 
@@ -54,7 +54,7 @@ const Container = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
-  border-radius: 20px;
+  border-radius: 8px;
 `;
 
 const TitieAndContent = styled.div`
@@ -62,7 +62,7 @@ const TitieAndContent = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  padding-top: 50px;
+  padding-top: 20px;
   padding-bottom: 20px;
   //padding-bottom: 10px;
   gap: 10px;
@@ -89,7 +89,7 @@ const FirstBtn = styled.button`
   border: 1px solid #7579e7;
   background-color: #fff;
   color: #7579e7;
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 6px 15px 6px 15px;
   font-weight: 500;
   font-size: 15px;
@@ -101,7 +101,7 @@ const SecondtBtn = styled.button`
   border: 1px solid #7579e7;
   background-color: #7579e7;
   color: white;
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 6px 15px 6px 15px;
   font-weight: 500;
   font-size: 15px;

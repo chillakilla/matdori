@@ -3,40 +3,45 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { doc, deleteDoc } from 'firebase/firestore';
 import { db } from '../firebase';
+import smile from '../assets/smile.svg';
 
 const StFeedDiv = styled.div`
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 640px;
   min-width: 550px;
   align-items: flex-start;
-  /* cursor: pointer; */
-
-  margin: 10px;
-  padding: 5px 20px 20px 20px;
+  margin: 0 0 40px 0;
+  padding: 20px;
   border-radius: 15px;
   background-color: white;
-  border: 1px solid #7579e7;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.06);
   color: black;
 
   img {
     width: 100%;
   }
+  h1 {
+    margin-top: 24px;
+  }
 `;
 
 const StWriterDiv = styled.div`
   width: 100%;
-  height: 60px;
+  height: auto;
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
-  border-bottom: 1px solid gray;
-  padding: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ededed;
   position: relative;
   img {
-    width: 50px;
-    margin-right: 20px;
+    width: 24px;
+    margin-right: 8px;
     border-radius: 100%;
+  }
+  span {
+    color: #555555;
+    font-size: 14px;
   }
   button {
     position: absolute;
@@ -62,6 +67,8 @@ const StGradientDiv = styled.div`
 `;
 
 const StPforContent = styled.p`
+  text-align: left;
+  line-height: 1.6;
   white-space: pre-wrap;
 `;
 
@@ -74,16 +81,27 @@ const StFeedMainDiv = styled.div`
   max-height: 400px;
   overflow: hidden;
   background-color: white;
+
+  div {
+    width: 100%;
+  }
 `;
 const StDetailBtn = styled.button`
   margin-top: 20px;
   width: 100%;
+  height: 40px;
   background-color: inherit;
   border: 1px solid #7579e7;
   border-radius: 5px;
   color: #7579e7;
   padding: 0.5rem;
+  transition: all 0.2s;
   cursor: pointer;
+
+  &:hover {
+    background-color: #7579e7;
+    color: #fff;
+  }
 `;
 
 function EachFeed({ feed, location }) {
@@ -105,10 +123,7 @@ function EachFeed({ feed, location }) {
   return (
     <StFeedDiv>
       <StWriterDiv>
-        <img
-          src="https://global.discourse-cdn.com/turtlehead/optimized/2X/c/c830d1dee245de3c851f0f88b6c57c83c69f3ace_2_250x250.png"
-          alt=""
-        />
+        <img src={smile} alt="" />
 
         <span>{feed.user}</span>
 

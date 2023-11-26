@@ -13,6 +13,8 @@ import { auth } from '../firebase';
 import Header from 'components/UI/Header';
 import { useDispatch } from 'react-redux';
 import { current_Email } from 'redux/modules/currentEmail';
+import google from '../assets/google.png';
+import github from '../assets/github.png';
 
 const Login = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
@@ -138,6 +140,7 @@ const Login = () => {
             ) : (
               <>
                 <LoginButton onClick={signIn}>로그인</LoginButton>
+                <BR>OR</BR>
                 <LoginButton onClick={signWithGoogle}>Google 로그인</LoginButton>
                 <LoginButton onClick={signWithGithub}>Github 로그인</LoginButton>
               </>
@@ -159,70 +162,153 @@ const LoginContainer = styled.div`
 `;
 
 const InputContainer = styled.div`
-  width: 500px;
-  height: 300px;
+  width: 440px;
+  height: auto;
+  padding: 40px 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 16px;
+  background-color: #fff;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
 `;
 
 const Title = styled.h2`
   font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 30px;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
   gap: 10px;
+  font-size: 16px;
 `;
 
 const IdContainer = styled.div`
   font-weight: bold;
-  padding: 10px;
-  transform: translateX(5.5%);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  label {
+    font-weight: normal;
+    color: #777;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
 `;
 
 const Input = styled.input`
   padding: 5px;
+  border-radius: 8px;
+  border: 1px solid #c7c7c7;
+  height: 40px;
+  margin-bottom: 10px;
+  font-size: 16px;
 `;
 
 const PasswordContainer = styled.div`
-  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  label {
+    font-weight: normal;
+    color: #777;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
+  flex-direction: column;
   gap: 10px;
   margin: 10px;
+  width: 100%;
 `;
 
 const LoginButton = styled.button`
-  width: 80px;
+  width: 100%;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 10px;
-  color: white;
-  background-color: #7579e7;
+  font-size: 16px;
   cursor: pointer;
-  transition: all 0.2s ease;
-  &:hover {
-    background-color: white;
-    color: black;
+  &:nth-child(1) {
+    color: #fff;
+    background: #7579e7;
   }
-  &:active {
-    transform: scale(1.1);
+  &:nth-child(2) {
+    position: relative;
+    color: #333;
+    background: #e6e6e6;
+  }
+  &:nth-child(2)::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translate(-50%, -50%);
+    display: block;
+    width: 24px;
+    height: 24px;
+    background: url(${google});
+  }
+  &:nth-child(3) {
+    position: relative;
+    color: #fff;
+    background: #333;
+  }
+  &:nth-child(3)::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translate(-50%, -50%);
+    display: block;
+    width: 18px;
+    height: 17.473px;
+    background: url(${github});
+  }
+`;
+
+const BR = styled.p`
+  position: relative;
+  color: #555;
+  font-size: 14px;
+  text-align: center;
+  margin: 10px 0;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: calc(50% - 30px);
+    height: 1px;
+    background: #e8e8ea;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: calc(50% - 30px);
+    height: 1px;
+    background: #e8e8ea;
   }
 `;
 
 const ErrorTextContainer = styled.div`
   width: max-content;
-  height: 40px;
+  height: auto;
 `;
 
 const ErrorText = styled.p`
   color: red;
-  margin-top: 20px;
+  margin-bottom: 0 10px;
 `;
 
 export default Login;
