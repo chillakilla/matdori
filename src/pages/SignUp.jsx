@@ -74,7 +74,13 @@ const SignUp = () => {
             </PwInputContainer>
             <InputContainer>
               <label>Name : &nbsp;</label>
-              <Input type="text" value={credentials.displayName} name="text" onChange={onChange} required></Input>
+              <Input
+                type="text"
+                value={credentials.displayName}
+                name="displayName"
+                onChange={onChange}
+                required
+              ></Input>
             </InputContainer>
             <ErrorTextContainer>{showError && <ErrorText>{error}</ErrorText>}</ErrorTextContainer>
           </InputForm>
