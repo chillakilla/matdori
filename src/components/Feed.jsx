@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { collection, onSnapshot, getDocs, query, where } from 'firebase/firestore';
+import { collection, onSnapshot, query, where, orderBy } from 'firebase/firestore';
 import { db } from '../firebase';
 import EachFeed from './EachFeed';
 import styled from 'styled-components';
@@ -28,7 +28,7 @@ function Feed() {
   //서버에서 자료 가져오는 개선된 버전 -> 자료 수정/삭제/추가 에따라 실시간 업데이트
   //cf ) onSnapshot 은 비동기 작업이 아님--> async/await 미사용
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, 'feeds'), (querySnapshot) => {
+    const unsubscribe = onSnapshot(query(collection(db, 'feeds'), orderBy('date', 'desc')), (querySnapshot) => {
       const updatedFeeds = [];
       querySnapshot.forEach((doc) => {
         updatedFeeds.push({ id: doc.id, ...doc.data() });
