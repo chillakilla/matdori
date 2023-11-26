@@ -11,12 +11,12 @@ import { getStorage } from 'firebase/storage';
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAVfmiyGHGL9S5RsMETiJUtM_RNh3fK-9Y',
-  authDomain: 'prac1-5411a.firebaseapp.com',
-  projectId: 'prac1-5411a',
-  storageBucket: 'prac1-5411a.appspot.com',
-  messagingSenderId: '907197694037',
-  appId: '1:907197694037:web:983787cde2dc80347394dc'
+  apiKey: 'AIzaSyCx4ukuHk40m0ISwC_1C-39N1c2X4BaOZk',
+  authDomain: 'newsfeed-bc445.firebaseapp.com',
+  projectId: 'newsfeed-bc445',
+  storageBucket: 'newsfeed-bc445.appspot.com',
+  messagingSenderId: '927261142906',
+  appId: '1:927261142906:web:b5e7cda17806df8c5ef0c3'
 };
 
 // Initialize Firebase
