@@ -91,6 +91,13 @@ const Button = styled.button`
   border: none;
   border-radius: 20px;
   cursor: pointer;
+  &:hover {
+    background-color: white;
+    color: black;
+  }
+  &:active {
+    transform: scale(1.1);
+  }
 `;
 
 const Button1 = styled.button`
@@ -102,6 +109,13 @@ const Button1 = styled.button`
   border: 1px solid #efefef;
   border-radius: 20px;
   cursor: pointer;
+  &:hover {
+    background-color: #7579e7;
+    color: white;
+  }
+  &:active {
+    transform: scale(1.1);
+  }
 `;
 
 export default Header;

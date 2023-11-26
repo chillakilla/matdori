@@ -58,7 +58,6 @@ const Login = () => {
     }
   };
 
-  const signUp = async (event) => handleAuth(event, createUserWithEmailAndPassword, '회원가입을 환영합니다.');
   const signIn = async (event) => handleAuth(event, signInWithEmailAndPassword, '로그인 성공');
   const logOut = async (event) => {
     event.preventDefault();
@@ -102,7 +101,7 @@ const Login = () => {
                 name="email"
                 onChange={onChange}
                 required
-                placeholder="asdasd@gmail.com"
+                placeholder="sparta@gmail.com"
                 autoFocus
               ></Input>
             </IdContainer>
@@ -117,7 +116,6 @@ const Login = () => {
               <LoginButton onClick={logOut}>로그아웃</LoginButton>
             ) : (
               <>
-                <LoginButton onClick={signUp}>회원가입</LoginButton>
                 <LoginButton onClick={signIn}>로그인</LoginButton>
                 <LoginButton onClick={signWithGoogle}>Google 로그인</LoginButton>
               </>
@@ -183,7 +181,7 @@ const LoginButton = styled.button`
   border-radius: 10px;
   padding: 10px;
   color: white;
-  background-color: black;
+  background-color: #7579e7;
   cursor: pointer;
   transition: all 0.2s ease;
   &:hover {
