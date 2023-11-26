@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import ImgUpload from 'components/UI/ImgUpload';
 import Header from 'components/UI/Header';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { auth } from '../firebase';
 import Feed from 'components/Feed';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,9 +12,19 @@ function MyPage() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(auth.currentUser !== null);
 
-  const currentEmail = useSelector((state) => state.currentEmail);
+  // const currentEmail = useSelector((state) => state.currentEmail);
+  console.log(auth.currentUser);
+  const email = auth.currentUser.email;
+  const userProfileImgUrl =
+    auth.currentUser.photoURL === null
+      ? 'https://firebasestorage.googleapis.com/v0/b/fir-e-9aec4.appspot.com/o/folder%2F_7fdc97b7-c89c-41b1-bd84-7cfb1b07a7d2.jpg?alt=media&token=e0c9e857-d8c8-49c2-931a-2b6fa45d8db0'
+      : auth.currentUser.photoURL;
 
-  dispatch(getByUser(currentEmail));
+  const displayName = auth.currentUser.displayName === null ? '닉네임' : auth.currentUser.displayName;
+
+  useEffect(() => {
+    dispatch(getByUser(email));
+  }, []);
 
   return (
     <>
@@ -22,7 +32,7 @@ function MyPage() {
       <Container>
         <Profile>
           <ProfileImg>
-            <ImgUpload />
+            <ImgUpload userProfileImgUrl={userProfileImgUrl} />
             <EditImg>
               <svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -33,8 +43,8 @@ function MyPage() {
             </EditImg>
           </ProfileImg>
           <InfoWrapper>
-            <Nickname>닉네임 / 이름</Nickname>
-            <Email>{currentEmail}</Email>
+            <Nickname>{displayName}</Nickname>
+            <Email>{email}</Email>
           </InfoWrapper>
         </Profile>
         <FeedArea>

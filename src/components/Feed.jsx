@@ -44,9 +44,9 @@ function Feed() {
   const field = filterConfig.field;
   filterdFeeds = filterConfig.value === '전체' ? feeds : feeds.filter((feed) => feed[field] === filterConfig.value);
 
-  console.log('서버에서 받아온 전체 피드들', feeds);
-  console.log('필터링조건', filterConfig);
-  console.log('필터링된 피드들', filterdFeeds);
+  // console.log('서버에서 받아온 전체 피드들', feeds);
+  // console.log('필터링조건', filterConfig);
+  // console.log('필터링된 피드들', filterdFeeds);
   return (
     <StFeedSection>
       {!filterdFeeds.length && <StFallbackP>일치하는 항목이 없습니다.</StFallbackP>}

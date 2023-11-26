@@ -84,6 +84,7 @@ const StBtnDiv = styled.div`
 const StTextAreaForContent = styled.p`
   resize: none;
   width: 100%;
+  min-width: 500px;
   height: auto;
   border-radius: 10px;
   border-color: transparent;
@@ -94,9 +95,12 @@ const StTextAreaForContent = styled.p`
 const StTextAreaForEdit = styled.textarea`
   resize: none;
   width: 100%;
+  min-width: 500px;
+
   min-height: 100px;
   background-color: #ffc0cb1d;
   border-radius: 10px;
+  border-color: transparent;
   font-size: large;
 `;
 const StTextAreaForTitleEdit = styled.textarea`
@@ -104,6 +108,8 @@ const StTextAreaForTitleEdit = styled.textarea`
   width: 100%;
   background-color: #ffc0cb1d;
   border-radius: 10px;
+  border-color: transparent;
+
   font-size: large;
 `;
 
@@ -116,8 +122,6 @@ function Detail() {
   const params = useParams();
   const filteredFeed = feeds.filter((feed) => feed.id === params.id);
   const feed = filteredFeed[0];
-  const [editText, setEditText] = useState(feed.content);
-  const [editTitle, setEditTitle] = useState(feed.title);
 
   //제목+ 타이틀 한번에 수정
   const [editData, setEditData] = useState({ ...feed });
