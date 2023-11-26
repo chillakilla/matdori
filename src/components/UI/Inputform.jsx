@@ -4,7 +4,8 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { openInputmodal } from 'redux/modules/modal';
+
+import { closeInputModal } from 'redux/modules/modal';
 
 function Inputform() {
   const [title, setTitle] = useState('');
@@ -72,7 +73,7 @@ function Inputform() {
               await addDoc(collectionRef, newData);
 
               //4. 모달닫기
-              dispatch(openInputmodal());
+              dispatch(closeInputModal());
             } else {
               return;
             }
