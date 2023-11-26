@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Feed from 'components/Feed';
 import Sidebar from 'components/Sidebar';
-import Header from '../components/UI/Header';
+
 import { auth } from '../firebase';
 import InputformLayout from 'components/UI/InputformLayout';
 import { useDispatch } from 'react-redux';
@@ -16,10 +16,9 @@ function Home() {
 
   return (
     <>
-      <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-      <span>홈입니다</span>
       <Sidebar />
-      <InputformLayout />
+      <InputformLayout isLoggedIn={isLoggedIn} />
+      {/* 인풋폼레이아웃 부분 변경 */}
       <Feed />
     </>
   );

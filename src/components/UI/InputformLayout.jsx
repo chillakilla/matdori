@@ -6,7 +6,7 @@ import { openInputmodal } from 'redux/modules/modal';
 import PublicModal from './PublicModal';
 import { closePublicModal, showPublicModal } from 'redux/modules/publicModal';
 
-function InputformLayout() {
+function InputformLayout({ isLoggedIn }) {
   const modal = useSelector((state) => state.modal);
   const publicModal = useSelector((state) => state.publicModal);
   const currentEmail = useSelector((state) => state.currentEmail);
@@ -28,16 +28,15 @@ function InputformLayout() {
     );
   };
 
-  const isUserLogIn = Boolean(currentEmail);
-  const handleClick = isUserLogIn ? openModal : openModal_NOLogin;
+  const handleClick = isLoggedIn ? openModal : openModal_NOLogin;
 
   return (
     <StSection>
       <Button onClick={handleClick}>
         <div> 새 글 작성시 여기를 클릭하세요!</div>
       </Button>
-      {!isUserLogIn && publicModal.isUse && <PublicModal />}
-      {isUserLogIn && modal.isUseInput && <Modal />}
+      {!isLoggedIn && publicModal.isUse && <PublicModal />}
+      {isLoggedIn && modal.isUseInput && <Modal />}
     </StSection>
   );
 }
