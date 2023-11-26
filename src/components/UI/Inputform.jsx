@@ -89,7 +89,7 @@ function Inputform() {
           </div>
 
           <StDiv>
-            <p>🏬 편의점</p>
+            <p>🏬 편의점 </p>
             <select value={CVS} onChange={(event) => setCVS(event.target.value)}>
               <option>CU</option>
               <option>GS</option>
