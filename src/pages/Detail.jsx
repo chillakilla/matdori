@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { doc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useNavigate } from 'react-router-dom';
+import { closePublicModal, showPublicModal } from 'redux/modules/publicModal';
+import PublicModal from 'components/UI/PublicModal';
 
 const StDetailSection = styled.section`
   display: flex;
@@ -123,17 +125,29 @@ function Detail() {
   const filteredFeed = feeds.filter((feed) => feed.id === params.id);
   const feed = filteredFeed[0];
 
-  //제목+ 타이틀 한번에 수정
+  const dispatch = useDispatch();
+  const publicmodal = useSelector((state) => state.publicModal);
+
+  //제목+ 타이틀 한번에 수정완료
   const [editData, setEditData] = useState({ ...feed });
 
   const deletBtnHndlr = () => {
-    if (window.confirm('삭제할까요?')) {
-      const feedRef = doc(db, 'feeds', feed.id);
-      deleteDoc(feedRef);
-      navigate(-1);
-    } else {
-      return;
-    }
+    dispatch(
+      showPublicModal({
+        isUse: true,
+        title: '삭제할까요?',
+        message: '삭제되면 복구가 불가능합니다.',
+        btnMsg: '취소',
+        btnFn: () => dispatch(closePublicModal()),
+        btnMsg2: '삭제',
+        btnFn2: () => {
+          dispatch(closePublicModal());
+          const feedRef = doc(db, 'feeds', feed.id);
+          deleteDoc(feedRef);
+          navigate(-1);
+        }
+      })
+    );
   };
 
   /**
@@ -189,7 +203,6 @@ function Detail() {
          * 2. 수정 : 제목 + 내용 수정
          * 3. 수정 후 : {editData.title}으로 수정사항 반영
          */}
-
         {isEditing ? (
           <>
             <StTextAreaForTitleEdit onChange={(event) => editChangeHndlr(event, 'title')} value={editData.title} />
@@ -207,13 +220,15 @@ function Detail() {
             <StTextAreaForContent disabled>{editData.content}</StTextAreaForContent>
           </>
         )}
+        collection(db, 'feeds')
         <br />
       </StMainArea>
-      <p>문서id : {feed.id}(개발완료후 삭제할것)</p>
+
       {isFromMyPage && (
         <StBtnDiv>
           <button onClick={editBtnHndlr}>{isEditing ? '수정완료' : '수정'}</button>
           <button onClick={deletBtnHndlr}>삭제</button>
+          {publicmodal.isUse && <PublicModal />}
         </StBtnDiv>
       )}
     </StDetailSection>

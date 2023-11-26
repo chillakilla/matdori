@@ -14,12 +14,13 @@ function Inputform() {
   const [CVS, setCVS] = useState('CU'); //편의점 이름
 
   const currentEmail = useSelector((state) => state.currentEmail);
-
+  let fileYN = '';
   //dispatch
   const dispatch = useDispatch();
 
   const handleFileSelect = (event) => {
     setSelectedFile(event.target.files[0]);
+    fileYN = '첨부되었습니다.';
   };
 
   //이미지 파일 업로드
@@ -88,12 +89,13 @@ function Inputform() {
           </div>
 
           <StDiv>
-            <p>🏬 편의점</p>
+            <p>🏬 편의점 </p>
             <select value={CVS} onChange={(event) => setCVS(event.target.value)}>
               <option>CU</option>
               <option>GS</option>
               <option>이마트24</option>
               <option>세븐일레븐</option>
+              <option>미니스탑</option>
             </select>
           </StDiv>
           <StDiv>
@@ -118,6 +120,7 @@ function Inputform() {
           <FileUplod>
             <input type="file" name="fileSelect" id="fileAttach" onChange={handleFileSelect}></input>
             <label htmlFor="fileAttach">사진 첨부하기</label>
+            <p>{fileYN}</p>
           </FileUplod>
           <BtnSection>
             <Button>등록하기</Button>
