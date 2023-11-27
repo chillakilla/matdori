@@ -50,7 +50,7 @@ const StSidebarDiv = styled.div`
     right: 20px;
     transform: translateY(-50%);
     display: block;
-    width: 34.105px;
+    width: 38.961px;
     height: 24px;
     background: url(${cu}) no-repeat;
   }
@@ -64,7 +64,7 @@ const StSidebarDiv = styled.div`
     right: 20px;
     transform: translateY(-50%);
     display: block;
-    width: 73px;
+    width: 66px;
     height: 22px;
     background: url(${seven}) no-repeat;
   }
@@ -78,8 +78,8 @@ const StSidebarDiv = styled.div`
     right: 20px;
     transform: translateY(-50%);
     display: block;
-    width: 40px;
-    height: 12.903px;
+    width: 41.227px;
+    height: 13px;
     background: url(${gs25}) no-repeat;
   }
   li:nth-child(5) {
@@ -92,7 +92,7 @@ const StSidebarDiv = styled.div`
     right: 20px;
     transform: translateY(-50%);
     display: block;
-    width: 34px;
+    width: 30.984px;
     height: 20px;
     background: url(${ministop}) no-repeat;
   }
@@ -106,37 +106,38 @@ const StSidebarDiv = styled.div`
     right: 20px;
     transform: translateY(-50%);
     display: block;
-    width: 50px;
-    height: 25px;
+    width: 59.564px;
+    height: 12px;
     background: url(${emart24}) no-repeat;
   }
   li:nth-child(1):hover {
     background: #f1f4fd;
-    font-weight: 500;
+    font-weight: bold;
   }
   li:nth-child(2):hover {
+    background: #bedd4d;
     color: #652b90;
-    font-weight: 500;
+    font-weight: bold;
   }
   li:nth-child(3):hover {
-    background: #0ba94a;
-    color: #ee8200;
-    font-weight: 500;
+    background: #0fac4d;
+    color: #ffa12e;
+    font-weight: bold;
   }
   li:nth-child(4):hover {
-    background: #1587ff;
+    background: #1d88fc;
     color: #b9fffc;
-    font-weight: 500;
+    font-weight: bold;
   }
   li:nth-child(5):hover {
-    background: #ffcf10;
+    background: #ffd21e;
     color: #1846a5;
-    font-weight: 500;
+    font-weight: bold;
   }
   li:nth-child(6):hover {
-    background: #767676;
+    background: #818181;
     color: #ffb035;
-    font-weight: 500;
+    font-weight: bold;
   }
 `;
 

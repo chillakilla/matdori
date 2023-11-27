@@ -139,20 +139,16 @@ const Button = styled.button`
 `;
 
 const Button1 = styled.button`
-  width: 80px;
-  margin-right: 30px;
-  padding: 10px;
+  margin-right: 14px;
+  padding: 10px 20px;
   background-color: white;
   color: #555555;
   border: 1px solid #efefef;
   border-radius: 8px;
   cursor: pointer;
+  transition: all 0.3s;
   &:hover {
-    background-color: #7579e7;
-    color: white;
-  }
-  &:active {
-    transform: scale(1.1);
+    background-color: #dfdfdf;
   }
 `;
 

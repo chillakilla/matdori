@@ -237,14 +237,21 @@ const LoginButton = styled.button`
   padding: 10px;
   font-size: 16px;
   cursor: pointer;
+  transition: all 0.2s;
   &:nth-child(1) {
     color: #fff;
     background: #7579e7;
+  }
+  &:nth-child(1):hover {
+    background-color: #4e53cf;
   }
   &:nth-child(3) {
     position: relative;
     color: #333;
     background: #e6e6e6;
+  }
+  &:nth-child(3):hover {
+    background-color: #cbcbcb;
   }
   &:nth-child(3)::after {
     content: '';
@@ -261,6 +268,9 @@ const LoginButton = styled.button`
     position: relative;
     color: #fff;
     background: #333;
+  }
+  &:nth-child(4):hover {
+    background-color: #000000;
   }
   &:nth-child(4)::after {
     content: '';

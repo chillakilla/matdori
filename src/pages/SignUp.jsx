@@ -179,7 +179,7 @@ const Input = styled.input`
 const ButtonContainer = styled.div`
   display: flex;
   gap: 10px;
-  margin: 10px;
+  margin: 20px 0 0 0;
   width: 100%;
 `;
 
@@ -191,6 +191,11 @@ const LoginButton = styled.button`
   font-size: 16px;
   color: #fff;
   background: #7579e7;
+  transition: all 0.2s;
+  cursor: pointer;
+  &:hover {
+    background-color: #4e53cf;
+  }
 `;
 
 const ErrorTextContainer = styled.div`

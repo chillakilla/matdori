@@ -86,27 +86,26 @@ const ButtonDiv = styled.div`
 `;
 
 const FirstBtn = styled.button`
+  width: calc(50% - 5px);
+  height: 40px;
   border: 1px solid #7579e7;
   background-color: #fff;
   color: #7579e7;
   border-radius: 8px;
-  padding: 6px 15px 6px 15px;
+  font-size: 16px;
   font-weight: 500;
-  font-size: 15px;
-  box-shadow: 1px 2px 3px 0px #f2f2f2;
-  outline: none;
+  cursor: pointer;
 `;
 
 const SecondtBtn = styled.button`
-  border: 1px solid #7579e7;
+  width: calc(50% - 5px);
+  height: 40px;
   background-color: #7579e7;
   color: white;
   border-radius: 8px;
-  padding: 6px 15px 6px 15px;
+  font-size: 16px;
   font-weight: 500;
-  font-size: 15px;
-  box-shadow: 1px 2px 3px 0px #f2f2f2;
-  outline: none;
+  cursor: pointer;
 `;
 
 export default PublicModal;
