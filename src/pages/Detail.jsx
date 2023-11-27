@@ -48,7 +48,11 @@ const StdateSpan = styled.span`
   position: absolute;
   right: 10px;
   font-size: 14px;
-  color: #999;
+  width: 120px;
+  line-height: 1.2;
+  text-align: right;
+
+  color: #7579e7;
 `;
 const StTitleH2 = styled.h2`
   padding-bottom: 20px;

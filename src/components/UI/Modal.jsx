@@ -46,7 +46,6 @@ function Modal() {
   };
 
   return (
-    /////최상단 모달 넣기
     <>
       {publicmodal.isUse && <PublicModal />}
 
