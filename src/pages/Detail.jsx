@@ -222,7 +222,6 @@ function Detail() {
         )}
         <br />
       </StMainArea>
-
       {isFromMyPage && (
         <StBtnDiv>
           <button onClick={editBtnHndlr}>{isEditing ? '수정완료' : '수정'}</button>
