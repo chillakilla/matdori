@@ -43,6 +43,13 @@ const Login = () => {
 
   const handleAuth = async (event, authFunction, successMessage) => {
     event.preventDefault();
+
+    if (!credentials.email.trim() || !credentials.password.trim()) {
+      setError('이메일과 비밀번호를 입력하세요.');
+      setShowError(true);
+      return;
+    }
+
     if (authFunction === signInWithEmailAndPassword && !isValidEmail(credentials.email)) {
       setError('올바른 형식의 이메일이 아닙니다.');
       setShowError(true);
@@ -83,7 +90,6 @@ const Login = () => {
       const authProvider = initializeAuthProvider(provider);
       const result = await signInWithPopup(auth, authProvider);
       setIsLoggedIn(true);
-      localStorage.setItem('isLoggedIn', 'true');
       setError(successMessage);
       alert('로그인 되었습니다.');
       navigate('/');
