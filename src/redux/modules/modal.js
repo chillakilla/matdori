@@ -1,7 +1,7 @@
-//1.action item
+//action types
 const OPENINPUTMODAL = 'OPENINPUTMODAL';
 const CLOSEINPUTMODAL = 'CLOSEINPUTMODAL';
-//2.action creator
+//action creator
 export const closeInputModal = () => {
   return { type: CLOSEINPUTMODAL };
 };
@@ -10,10 +10,9 @@ export const openInputmodal = () => {
   return { type: OPENINPUTMODAL };
 };
 
-//3. initialState
 const initialState = { isUseInput: false };
 
-//4. reducer
+// reducer
 const modal = (state = initialState, action) => {
   switch (action.type) {
     case CLOSEINPUTMODAL:
@@ -27,5 +26,4 @@ const modal = (state = initialState, action) => {
   }
 };
 
-//5. reducer export
 export default modal;

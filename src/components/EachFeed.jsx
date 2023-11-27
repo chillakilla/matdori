@@ -54,7 +54,6 @@ const StTitle = styled.h1`
   font-size: 1.5rem;
 `;
 
-//아래 그라데이션 div가 길이가 짧은 글일 경우엔 나올 필요 없는데 어떻게 안나오게 하는지 몰루겠음...
 const StGradientDiv = styled.div`
   display: inline-block;
   width: 100%;
@@ -141,9 +140,6 @@ function EachFeed({ feed, location }) {
         </div>
         <StGradientDiv></StGradientDiv>
       </StFeedMainDiv>
-      {/* <p>작성일 : {feed.date}</p>
-      <p>문서id : {feed.id}</p>
-      <p>편의점 : {feed.CVS}</p> */}
       <StDetailBtn onClick={feedClickHndlr}>자세히 보기</StDetailBtn>
     </StFeedDiv>
   );

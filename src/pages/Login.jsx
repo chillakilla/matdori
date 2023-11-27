@@ -18,8 +18,6 @@ import github from '../assets/github.png';
 
 const Login = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [showError, setShowError] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);

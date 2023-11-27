@@ -8,7 +8,7 @@ import { getAll } from 'redux/modules/filterConfig';
 import styled from 'styled-components';
 
 function Home() {
-  const [isLoggedIn, setIsLoggedIn] = useState(auth.currentUser !== null);
+  const [isLoggedIn] = useState(auth.currentUser !== null);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAll());
@@ -19,7 +19,6 @@ function Home() {
       <MainContent>
         <Sidebar />
         <InputformLayout isLoggedIn={isLoggedIn} />
-        {/* 인풋폼레이아웃 부분 변경 */}
         <Feed />
       </MainContent>
     </>

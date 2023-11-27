@@ -15,7 +15,6 @@ const StSidebarDiv = styled.div`
   box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.06);
   border-radius: 15px;
 
-  //나중에 헤더 생기면 위치 수정 필요!!
   position: fixed;
   top: 100px;
   left: 50%;
@@ -26,7 +25,6 @@ const StSidebarDiv = styled.div`
     left: 10px;
     transform: unset;
   }
-  //화면 가로폭이 좁아지면 사이드바 숨김
   @media (max-width: 850px) {
     display: none;
   }

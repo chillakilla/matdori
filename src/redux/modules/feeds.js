@@ -8,7 +8,7 @@ export const setFeeds = (payload) => {
   return { type: SET_FEEDS, payload };
 };
 
-// 리듀서
+// reducer
 const feeds = (state = initialState, action) => {
   switch (action.type) {
     case SET_FEEDS:

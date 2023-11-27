@@ -11,11 +11,11 @@ function Inputform() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [selectedFile, setSelectedFile] = useState('');
-  const [CVS, setCVS] = useState('CU'); //편의점 이름
+  const [CVS, setCVS] = useState('CU');
 
   const currentEmail = useSelector((state) => state.currentEmail);
   let fileYN = '';
-  //dispatch
+
   const dispatch = useDispatch();
 
   const handleFileSelect = (event) => {
@@ -31,10 +31,8 @@ function Inputform() {
     }
 
     const imageRef = ref(storage, `${auth.currentUser.uid}/${selectedFile.name}`);
-    //FileName = `${selectedFile.name}`;
     try {
       await uploadBytes(imageRef, selectedFile);
-      // 저장된 image url :getDownloadURL(imageRef)
       return await getDownloadURL(imageRef);
     } catch (error) {
       console.log('Inputform.jsx (handleUpload): ', error);
@@ -110,10 +108,8 @@ function Inputform() {
           <StContent
             placeholder="내용을 입력해주세요"
             value={content}
-            //contentEditable={true}
             onChange={(event) => {
-              setContent(event.currentTarget.value); //onChange event시 사용
-              // setContent(event.currentTarget.textContent);
+              setContent(event.currentTarget.value);
             }}
           ></StContent>
 

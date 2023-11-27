@@ -16,7 +16,7 @@ function Modal() {
   const openPublicModal = () => {
     const goOut = () => {
       dispatch(closePublicModal());
-      dispatch(closeInputModal()); //기존 모달
+      dispatch(closeInputModal());
       navigator('/');
     };
 
@@ -38,8 +38,6 @@ function Modal() {
   };
 
   const closeModal_outside = (event) => {
-    //event.target = 내가 지금 클릭한 곳
-    //event.currentTarget = onClick이 할당된 element(Background)
     if (event.target === event.currentTarget) {
       openPublicModal();
     }
@@ -88,10 +86,7 @@ const BackGround = styled.div`
 const Container = styled.div`
   width: 560px;
   height: auto;
-  /*최상단 위치 */
   z-index: 100;
-  /*중앙배치 */
-  /*translate:본인 사이즈 기준 */
   position: absolute;
   top: 50%;
   left: 50%;

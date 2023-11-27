@@ -9,7 +9,6 @@ import { closePublicModal, showPublicModal } from 'redux/modules/publicModal';
 function InputformLayout({ isLoggedIn }) {
   const modal = useSelector((state) => state.modal);
   const publicModal = useSelector((state) => state.publicModal);
-  const currentEmail = useSelector((state) => state.currentEmail);
   const dispatch = useDispatch();
 
   const openModal = () => {

@@ -4,10 +4,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const ImgUpload = ({ userProfileImgUrl }) => {
-  const [selectedImg, setSelectedImg] = useState(
-    // 'https://firebasestorage.googleapis.com/v0/b/fir-e-9aec4.appspot.com/o/folder%2F_7fdc97b7-c89c-41b1-bd84-7cfb1b07a7d2.jpg?alt=media&token=e0c9e857-d8c8-49c2-931a-2b6fa45d8db0'
-    userProfileImgUrl
-  );
+  const [selectedImg, setSelectedImg] = useState(userProfileImgUrl);
 
   const handleFileSelect = async (event) => {
     const imageFile = event.target.files[0];

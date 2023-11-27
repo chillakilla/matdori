@@ -1,4 +1,4 @@
-//action item
+//action types
 const CLOSEMODAL = 'CLOSEMODAL';
 const SHOWMODAL = 'SHOWMODAL';
 
@@ -11,7 +11,6 @@ export const showPublicModal = (payload) => {
   return { type: SHOWMODAL, payload };
 };
 
-//initaiState
 const initialState = { isUse: false, title: '제목', message: '메세지', btnMsg: '', btnFn: '', btnMsg2: '', btnFn2: '' };
 
 //reducer
@@ -28,5 +27,4 @@ const publicModal = (state = initialState, action) => {
   }
 };
 
-//export
 export default publicModal;

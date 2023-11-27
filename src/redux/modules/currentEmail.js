@@ -1,14 +1,14 @@
-//1.action item
+//action type
 const CURRENTEMAIL = 'CURRENTEMAIL';
 
-//2.action creator
+//action creator
 export const current_Email = (payload) => {
   return { type: CURRENTEMAIL, payload };
 };
-//3. initialState
+
 const initialState = '';
 
-//4. reducer
+// reducer
 const currentEmail = (state = initialState, action) => {
   switch (action.type) {
     case CURRENTEMAIL:

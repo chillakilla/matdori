@@ -153,12 +153,6 @@ function Detail() {
     );
   };
 
-  /**
-   * 혜민 수정
-   * 1. 제목 + 내용 2개 동시에 수정
-   * editBtnHndlr() / editChangeHndlr() 수정
-   */
-
   const editBtnHndlr = () => {
     if (isEditing) {
       const feedRef = doc(db, 'feeds', feed.id);
@@ -170,9 +164,6 @@ function Detail() {
     setIsEditing((prev) => !prev);
   };
 
-  /**
-   * [대괄호] : 객체에서 키 동적 변경
-   */
   const editChangeHndlr = (event, field) => {
     setEditData({ ...editData, [field]: event.target.value });
   };
@@ -197,12 +188,6 @@ function Detail() {
       </StAuthorDiv>
 
       <StMainArea>
-        {/**
-         * 혜민 수정
-         * 1. isEditing ? 수정화면 (StTextAreaForEdit) : 수정x 화면 (StTitleH2)
-         * 2. 수정 : 제목 + 내용 수정
-         * 3. 수정 후 : {editData.title}으로 수정사항 반영
-         */}
         {isEditing ? (
           <>
             <StTextAreaForTitleEdit onChange={(event) => editChangeHndlr(event, 'title')} value={editData.title} />

@@ -4,7 +4,7 @@ import Header from 'components/UI/Header';
 import React, { useEffect, useState } from 'react';
 import { auth } from '../firebase';
 import Feed from 'components/Feed';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getByUser } from 'redux/modules/filterConfig';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
@@ -13,7 +13,6 @@ function MyPage() {
   const dispatch = useDispatch();
   const [isLoggedIn, setIsLoggedIn] = useState(auth.currentUser !== null);
   const [displayName, setDisplayName] = useState();
-  // const currentEmail = useSelector((state) => state.currentEmail);
   console.log(auth.currentUser);
 
   const email = auth.currentUser.email;
@@ -62,9 +61,6 @@ function MyPage() {
           <FeedTitleArea>
             <FeedTitle>작성한 포스트</FeedTitle>
           </FeedTitleArea>
-          {/* <Feed>
-            <NoResult>작성한 포스트가 없습니다.</NoResult>
-          </Feed> */}
 
           <Feed />
         </FeedArea>
@@ -137,13 +133,6 @@ const FeedTitle = styled.div`
   text-align: center;
   font-weight: 500;
   border-bottom: 1px solid #333333;
-`;
-// const Feed = styled.div``;
-
-const NoResult = styled.p`
-  margin-top: 80px;
-  color: #777777;
-  text-align: center;
 `;
 
 export default MyPage;

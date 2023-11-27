@@ -33,7 +33,7 @@ export const getByUser = (uid) => {
   return { type: GET_BY_USER, payload: uid };
 };
 
-// 리듀서
+// reducer
 const filterConfig = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL:
@@ -73,7 +73,7 @@ const filterConfig = (state = initialState, action) => {
     case GET_BY_USER:
       const userId = action.payload;
       return {
-        field: 'user', //필드 이름이 뭐가 될지는 미정임. 팀원과 상의할것!!
+        field: 'user',
         compare: '==',
         value: userId
       };

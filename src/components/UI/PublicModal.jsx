@@ -44,11 +44,8 @@ const Container = styled.div`
   width: 400px;
   height: 200px;
   padding: 20px;
-  /*최상단 위치 */
   z-index: 999;
 
-  /*중앙배치 */
-  /*translate:본인 사이즈 기준 */
   position: fixed;
   top: 50%;
   left: 50%;
@@ -64,7 +61,6 @@ const TitieAndContent = styled.div`
   align-items: center;
   padding-top: 20px;
   padding-bottom: 20px;
-  //padding-bottom: 10px;
   gap: 10px;
   & h2 {
     font-weight: 600;
